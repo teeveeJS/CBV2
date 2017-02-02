@@ -4,7 +4,8 @@ function move(double_coord){
   var piece;
 
   if(hasPiece(m[0])){
-    piece = board[parseInt(start.num)][parseInt(start.alf)].substring(0,2);
+    piece = board[parseInt(start.num)][parseInt(start.alf)];
+    //better to make it the entire object
   } else {
     //call the prompt
   }
@@ -16,17 +17,13 @@ function move(double_coord){
   1. get the piece
   2. check if the move is legal
   3. perform the move
+  3.1. change the coordinates of the moved piece(s) in the ps-array
+  3.1.1 mark that the piece has moved (possibly captured)
+  3.2. reassign changes in board-array
   if the process is interrupted at any point, a new move(prompt()) will be sent
 
   */
 
 
 
-}
-
-function hasPiece(start){
-  var sq = board[parseInt(start.num)][parseInt(start.alf)];
-  return sq !== "o" &&
-        sq.substring(0,1) === "w" && white_move ||
-        sq.substring(0,1) === "b" && !white_move; //sq.substring(0,1) === "b" can probably be removed
 }

@@ -16,11 +16,15 @@
     <script src="isLegalKnight.js"></script>
     <script src="isLegalKing.js"></script>
     <script src="isLegalPawn.js"></script>
-    <script src="tests.js"></script>
+    <script src="tests.js"></script> <!--ignore-->
+    <script src="moveTable.js"></script>
+    <script src="utils.js"></script>
 
     <script type="text/javascript">
-      var ps = [];
+      var ps = []; //this array is probably useless
+      //all the objects can be contained within board-array
       var white_move = true;
+      var last_move; //will be necessary for en passant
 
       var board = [
                     [00, 01, 02, 03, 04, 05, 06, 07],
