@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Chess</title>
+    <!--<link rel="shortcut icon" href="king.ico">-->
+    <link rel="stylesheet" href="stylesheet.css">
+  </head>
+  <body>
+    <script src="pieces.js"></script>
+    <script src="board.js"></script>
+    <script src="move.js"></script>
+    <script src="coordinates.js"></script>
+    <script src="isLegal.js"></script>
+
+    <script type="text/javascript">
+      var ps = [];
+      var white_move = true;
+
+      var board = [
+                    [00, 01, 02, 03, 04, 05, 06, 07],
+                    [10, 11, 12, 13, 14, 15, 16, 17],
+                    [20, 21, 22, 23, 24, 25, 26, 27],
+                    [30, 31, 32, 33, 34, 35, 36, 37],
+                    [40, 41, 42, 43, 44, 45, 46, 47],
+                    [50, 51, 52, 53, 54, 55, 56, 57],
+                    [60, 61, 62, 63, 64, 65, 66, 67],
+                    [70, 71, 72, 73, 74, 75, 76, 77]
+                  ];
+                  //defaults which will be changed when initBoard has been called
+                  //alf = the second number
+                  //num = the first number
+
+      window.onload = function(){
+        document.getElementById("start_game").addEventListener("click", new_game);
+
+        createPieces();
+        initBoard();
+      };
+
+      function new_game(){
+        createPieces();
+        initBoard();
+        move(prompt("white to move"));
+      }
+
+
+    </script>
+
+    <button id="start_game">Start</button>
+
+  </body>
+</html>
