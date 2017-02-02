@@ -4,6 +4,7 @@ function CP(name, color, Alf, Num, isCaptured) {
   this.Alf = Alf;
   this.Num = Num;
   this.isCaptured = isCaptured;
+  this.hasMoved = false; //will not matter unless king or rook
 };
 
 function createPieces(){

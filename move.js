@@ -4,7 +4,9 @@ function move(double_coord){
   var piece;
 
   if(hasPiece(m[0])){
-    piece = board[parseInt(start.num)][parseInt(start.alf)].substring(1,2);
+    piece = board[parseInt(start.num)][parseInt(start.alf)].substring(0,2);
+  } else {
+    //call the prompt
   }
 
   if(isLegal(piece, m)){

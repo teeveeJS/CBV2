@@ -7,12 +7,12 @@ function alfToNum(str){
   var atn = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
 
   var start = {
-    num: str.substring(0,1); //1
-    alf: str.substring(1,2); //g
+    num: str.substring(0,1), //1
+    alf: str.substring(1,2) //g
   };
   var end = {
-    num: str.substring(3, 4); //3
-    alf: str.substring(4,5); //f
+    num: str.substring(3, 4), //3
+    alf: str.substring(4,5) //f
   }
 
   for(var i=0; i<atn.length; i++){
