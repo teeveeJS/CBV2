@@ -1,7 +1,7 @@
 function isLegalRook(move){
-  if(move[0].num - move[1] === 0 && move[0].alf - move[1].alf !== 0){
+  if(move[0].num - move[1].num === 0 && move[0].alf - move[1].alf !== 0){
     return checkRank(move);
-  } else if(move[0].num - move[1] !== 0 && move[0].alf - move[1].alf === 0){
+  } else if(move[0].num - move[1].num !== 0 && move[0].alf - move[1].alf === 0){
     return checkFile(move);
   } else {
     return false;
@@ -9,11 +9,11 @@ function isLegalRook(move){
 }
 
 function checkRank(move){
-  //check movement along a file (num, first number, rank changes)
+  //check movement along a rank (alf, second number, file changes)
   var dist = Math.abs(move[0].alf - move[1].alf);
   var dir = Math.sign(move[1].alf - move[0].alf);
   for(var i=0; i<dist; i++){
-    if(board[move[0].num][move[0].alf+dir*i] === "o"){
+    if(board[move[0].num][move[0].alf+dir*i] !== "o"){
       return false;
     }
   }
@@ -25,7 +25,7 @@ function checkFile(move){
   var dist = Math.abs(move[0].num - move[1].num);
   var dir = Math.sign(move[1].num - move[0].num);
   for(var i=0; i<dist; i++){
-    if(board[move[0].num+dir*i][move[0].alf] === "o"){
+    if(board[move[0].num+dir*i][move[0].alf] !== "o"){
       return false;
     }
   }
