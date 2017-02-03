@@ -21,7 +21,12 @@ function hasPiece(start){
 }
 
 function getContent(n, a){
-  return board[n][a];
+  for(var i=0; i<ps.length; i++){
+    if(ps[i].Num === n && ps[i].Alf === a){
+      return ps[i];
+    }
+  }
+  //return board[n][a]; this would work just as well...
   //now that i think of this...probably not all that useful
 }
 
