@@ -21,8 +21,8 @@ function whitePawn(piece, move){
     return true;
   };
   //captures (will include en passant)
-  if(Math.abs(deltaAlf) === 1){
-    
+  if(Math.abs(deltaAlf) === 1 && deltaNum === 1 && board[move[1].num][move[1].alf].color === "b"){
+    return true;
   }
 
 }
