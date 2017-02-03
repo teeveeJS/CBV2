@@ -10,12 +10,12 @@
     <script src="board.js"></script>
     <script src="move.js"></script>
     <script src="coordinates.js"></script>
-    <script src="isLegal.js"></script>
-    <script src="isLegalRook.js"></script>
-    <script src="isLegalBishop.js"></script>
-    <script src="isLegalKnight.js"></script>
-    <script src="isLegalKing.js"></script>
-    <script src="isLegalPawn.js"></script>
+    <script src="isLegal/isLegal.js"></script>
+    <script src="isLegal/isLegalRook.js"></script>
+    <script src="isLegal/isLegalBishop.js"></script>
+    <script src="isLegal/isLegalKnight.js"></script>
+    <script src="isLegal/isLegalKing.js"></script>
+    <script src="isLegal/isLegalPawn.js"></script>
     <script src="tests.js"></script> <!--ignore-->
     <script src="moveTable.js"></script>
     <script src="utils.js"></script>
@@ -45,6 +45,7 @@
 
         createPieces();
         initBoard();
+        displayBoard();
       };
 
       function new_game(){

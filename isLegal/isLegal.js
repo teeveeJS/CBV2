@@ -1,6 +1,6 @@
 function isLegal(p, mv){//ayy p = mv
   //checks if the output is of the same color
-  if(board[mv[1].num][mv[1].alf].substring(0,1) === p.color){
+  if(board[mv[1].num][mv[1].alf].color === p.color){
     return false;
   }
 

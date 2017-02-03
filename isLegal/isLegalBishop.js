@@ -7,7 +7,7 @@ function isLegalBishop(move){
     return false;
   } else {
     for(var i=0; i<deltaAlf; i++){
-      if(board[move[0].num+dirNum*i][move[0].alf+dirAlf*i] !== "o"){
+      if(!isEmpty(move[0].num+dirNum*i, move[0].alf+dirAlf*i)){
         return false;
       }
     }

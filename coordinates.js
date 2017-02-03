@@ -3,16 +3,17 @@ function numToAlf(str){
 }
 
 function alfToNum(str){
+  //REMEMBER 0-BASED INDEXING!!
   //input will be in the form g1-f3
   var atn = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
 
   var start = {
-    num: str.substring(0,1), //1
-    alf: str.substring(1,2) //g
+    num: str.substring(1,2) - 1, //0
+    alf: str.substring(0,1) //g
   };
   var end = {
-    num: str.substring(3, 4), //3
-    alf: str.substring(4,5) //f
+    num: str.substring(4,5) - 1, //2
+    alf: str.substring(3,4) //f
   }
 
   for(var i=0; i<atn.length; i++){

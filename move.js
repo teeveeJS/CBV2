@@ -1,18 +1,17 @@
 function move(double_coord){
   var m = alfToNum(double_coord);
   //m is an array of two objects: start and end
-  var piece;
+  var piece = board[parseInt(m[0].num)][parseInt(m[0].alf)];
 
-  if(hasPiece(m[0])){
-    piece = board[parseInt(start.num)][parseInt(start.alf)];
-    //better to make it the entire object
+  if(piece){
+    if(isLegal(piece, m)){
+      //perform the move
+    }
   } else {
     //call the prompt
   }
 
-  if(isLegal(piece, m)){
-    //perform the move
-  }
+
   /*
   1. get the piece
   2. check if the move is legal
