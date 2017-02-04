@@ -6,7 +6,7 @@ function isLegalBishop(move){
   if(deltaAlf !== deltaNum){
     return false;
   } else {
-    for(var i=0; i<deltaAlf; i++){
+    for(var i=1; i<deltaAlf; i++){
       if(!isEmpty(move[0].num+dirNum*i, move[0].alf+dirAlf*i)){
         return false;
       }

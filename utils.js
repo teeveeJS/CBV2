@@ -1,3 +1,24 @@
+var ps = []; //this array is probably useless
+//all the objects can be contained within board-array
+var white_move = true;
+var castle = false;
+var enP = false;
+var moves = []; //for en passant, read the last index
+
+var board = [
+              [00, 01, 02, 03, 04, 05, 06, 07],
+              [10, 11, 12, 13, 14, 15, 16, 17],
+              [20, 21, 22, 23, 24, 25, 26, 27],
+              [30, 31, 32, 33, 34, 35, 36, 37],
+              [40, 41, 42, 43, 44, 45, 46, 47],
+              [50, 51, 52, 53, 54, 55, 56, 57],
+              [60, 61, 62, 63, 64, 65, 66, 67],
+              [70, 71, 72, 73, 74, 75, 76, 77]
+            ];
+            //defaults which will be changed when initBoard has been called
+            //alf = the second number
+            //num = the first number
+
 var VALUES = {
   K: 999,
   Q: 9,
@@ -6,6 +27,8 @@ var VALUES = {
   N: 3,
   p: 1
 };
+
+var result;
 
 function isEmpty(n, a){
   //n (num) and a (alf) constitute the square
@@ -35,11 +58,15 @@ function removePieceFrom(n, a){
   //however, doesn't delete the piece from the ps array
 }
 
-function setPieceTo(p, c, n, a){
+function setNewPieceTo(p, c, n, a){
   return board[n][a] = new CP (p, c, a, n);
 }
 
-//could just use .toString();
+function capture(move){
+  return board[move[1].num][move[1].alf].color !== undefined;
+}
+
+//could just use .toString(); thx penda
 function equals(o1, o2){
   for(var i=0; i<o1.length; i++){
     for(n in o1[i]){

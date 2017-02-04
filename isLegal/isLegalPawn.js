@@ -28,6 +28,9 @@ function isLegalPawn(piece, move){
 
 }
 
-function checkPromotion(piece, move){
-  //this will be called in move.js, because checking promotion won't affect legality
+function promotion(piece, move){
+  if(piece.name !== "p") return false;
+  if(piece.color === "w" && move[1].num === 7 ||
+    piece.color === "b" && move[1].num === 0) return true;
+  return false;
 }

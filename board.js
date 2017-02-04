@@ -6,18 +6,36 @@ function initBoard(){
   }
 }
 
-function displayBoard(){
+function invertedBoard(){
+  console.clear();
   for(var i=0; i<8; i++){
     var str = "";
     for(var j=0; j<8; j++){
       if(board[i][j].color !== undefined){
         str += board[i][j].color + board[i][j].name + " ";
       } else {
-        str += "o "; //the board-array never actually contains "o";
+        str += "o  "; //the board-array never actually contains "o";
       }
     }
-    console.log(str);
+    console.log(String(i+1) + " " + str);
   }
+  console.log(". a  b  c  d  e  f  g  h");
+}
+
+function displayBoard(){
+  console.clear();
+  for(var i=7; i>=0; i--){
+    var str = "";
+    for(var j=0; j<8; j++){
+      if(board[i][j].color !== undefined){
+        str += board[i][j].color + board[i][j].name + " ";
+      } else {
+        str += "o  "; //the board-array never actually contains "o";
+      }
+    }
+    console.log(String(i+1) + " " + str);
+  }
+  console.log(". a  b  c  d  e  f  g  h");
 }
 
 function clearBoard(){
@@ -26,4 +44,10 @@ function clearBoard(){
       board[i][j] = i*10+j;
     }
   }
+}
+
+function new_game(){
+  createPieces();
+  initBoard();
+  move(prompt("white to move"));
 }
