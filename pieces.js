@@ -3,10 +3,11 @@ function CP(name, color, Alf, Num) {
   this.color = color;
   this.Alf = Alf;
   this.Num = Num;
-  this.isCaptured = false;
+  this.isCaptured = false; //OBSOLETE
   this.hasMoved = false; //will not matter unless pawn, king, or rook
 };
 
+//currently just used for defaults
 function createPieces(){
   ps = []; //empties the array for a new game
   for (j=0; j<8; j++) {

@@ -2,7 +2,8 @@ var ps = []; //this array is probably useless
 //all the objects can be contained within board-array
 var white_move = true;
 var castle = false;
-var enP = false;
+var enP = false; //en passant
+var ep_sq = {alf: null, num: null};
 var moves = []; //for en passant, read the last index
 
 var board = [
@@ -43,6 +44,7 @@ function hasPiece(start){
         sq.color === "b" && !white_move; //sq.substring(0,1) === "b" can probably be removed
 }
 
+//defunct since ps[] not in use
 function getContent(n, a){
   for(var i=0; i<ps.length; i++){
     if(ps[i].Num === n && ps[i].Alf === a){

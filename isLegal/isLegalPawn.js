@@ -8,6 +8,7 @@ function isLegalPawn(piece, move){
   //i know i could use else if's ... maybe will once i get all the different rules sorted out
   //double move
   if(deltaAlf === 0 && dir*deltaNum === 2 && !piece.hasMoved && isEmpty(move[1].num-dir, move[1].alf) && isEmpty(move[1].num, move[1].alf)){
+    ep_sq = {alf: move[0].alf, num: move[0].num+dir}; //the square in front of the initial square
     return true;
   };
   //single move
@@ -21,6 +22,7 @@ function isLegalPawn(piece, move){
   //en passant
   if(deltaAlf === 1 && dir*deltaNum === 1 &&
     equals(moves[moves.length-1], [{num: move[0].num+dir*2, alf: move[1].alf}, {num: move[0].num, alf: move[1].alf}])){
+    enP = true;
     return true;
   }
 

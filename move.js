@@ -19,6 +19,10 @@ function move(double_coord){
   //m is an array of two objects: start and end
   var piece = board[parseInt(m[0].num)][parseInt(m[0].alf)];
 
+  //to check that it is correct player's turn
+  if(!white_move && piece.color === "w" ||
+    white_move && piece.color === "b") move(prompt("Not your turn!"));
+
   if(piece){
     if(isLegal(piece, m)){
       //perform the move
@@ -55,11 +59,11 @@ function movePieces(p, m){
 
   //special conditions
   if(promotion(p, m)){
-    var P = "";
-    while(P !== "Q" || P !== "R" || P !== "B" || P !== "N"){
-      P = prompt("Promote to: Q|R|B|N");
+    var Pn;
+    while(Pn !== "Q" && Pn !== "R" && Pn !== "B" && Pn !== "N"){
+      Pn = prompt("Promote to: Q|R|B|N");
     }
-    board[m[1].num][m[1].alf].name = newPiece;
+    board[m[1].num][m[1].alf].name = Pn;
   } else if(castle){
     //moves the rook
     var r = selectRook(move);
@@ -69,10 +73,13 @@ function movePieces(p, m){
     //sets the global boolean back to default, because can be used by both players
     castle = false;
   } else if(capture(m)){
-
+    //not sure if any special actions need to be taken
+    //piece.isCaptured = true is probably the only one
+    //and even that is kinda useless, since ps[] is not used
   } else if(enP){
-
-
+    var dir = m[0].num === 4 ? -1 : 1; //up or down? based on color
+    removePieceFrom(m[1].num+dir, m[1].alf);
+    //set to default; will be used every time en passant is made
     enP = false;
   } else {
     null;

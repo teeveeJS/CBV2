@@ -7,7 +7,7 @@ function initBoard(){
 }
 
 function invertedBoard(){
-  console.clear();
+  //console.clear();
   for(var i=0; i<8; i++){
     var str = "";
     for(var j=0; j<8; j++){
@@ -23,7 +23,7 @@ function invertedBoard(){
 }
 
 function displayBoard(){
-  console.clear();
+  //console.clear();
   for(var i=7; i>=0; i--){
     var str = "";
     for(var j=0; j<8; j++){
@@ -44,10 +44,4 @@ function clearBoard(){
       board[i][j] = i*10+j;
     }
   }
-}
-
-function new_game(){
-  createPieces();
-  initBoard();
-  move(prompt("white to move"));
 }
