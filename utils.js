@@ -38,3 +38,15 @@ function removePieceFrom(n, a){
 function setPieceTo(p, c, n, a){
   return board[n][a] = new CP (p, c, a, n);
 }
+
+//could just use .toString();
+function equals(o1, o2){
+  for(var i=0; i<o1.length; i++){
+    for(n in o1[i]){
+      if(o1[i][n] !== o2[i][n]){
+        return false;
+      }
+    }
+  }
+  return true;
+}

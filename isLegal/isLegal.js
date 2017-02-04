@@ -20,7 +20,7 @@ function isLegal(p, mv){//ayy p = mv
       x = isLegalRook(mv) || isLegalBishop(mv);
 			break;
     case "K":
-      x = isLegalKing(mv);
+      x = isLegalKing(p, mv);
 			break;
     case "p":
       x = isLegalPawn(p, mv);
