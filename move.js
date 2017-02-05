@@ -28,7 +28,9 @@ function move(double_coord){
       //perform the move
       movePieces(piece, m);
       displayBoard();
-      move(prompt((white_move ? "White" : "Black") + " to move."));
+
+      //restarts the process
+      move(prompt((white_move ? "White" : "Black") + " to move"));
     } else {
       move(prompt("Make a legal move!"));
     }
@@ -39,10 +41,10 @@ function move(double_coord){
 
 
   /*
-  1. get the piece
-  2. check if the move is legal
+  1. get the piece DONE
+  2. check if the move is legal DONE
   3. perform the move
-  3.1. change the coordinates of the moved piece(s) in the ps-array
+  3.1. change the coordinates of the moved piece(s) in the ps-array EDIT: useless
   3.1.1 mark that the piece has moved (possibly captured)
   3.2. reassign changes in board-array
   if the process is interrupted at any point, a new move(prompt()) will be sent
@@ -64,23 +66,19 @@ function movePieces(p, m){
       Pn = prompt("Promote to: Q|R|B|N");
     }
     board[m[1].num][m[1].alf].name = Pn;
-  } else if(castle){
+  } else if(checkCastle(p, m)){
     //moves the rook
-    var r = selectRook(move);
-    var side = (r.Alf === 0) ? -1 : 1;
-    var r_move = [{num: r.Num, alf: r.Alf}, {num: m[1].num+side, alf: r.Alf}];
+    var r = selectRook(m);
+    var side = (r.Alf === 7) ? -1 : 1;
+    var r_move = [{num: r.Num, alf: r.Alf}, {num: m[1].num, alf: m[1].alf+side}];
     movePieces(r, r_move);
-    //sets the global boolean back to default, because can be used by both players
-    castle = false;
-  } else if(capture(m)){
+  } /*else if(capture(m)){
     //not sure if any special actions need to be taken
     //piece.isCaptured = true is probably the only one
     //and even that is kinda useless, since ps[] is not used
-  } else if(enP){
-    var dir = m[0].num === 4 ? -1 : 1; //up or down? based on color
+  } */else if(enPassant(p, m)){
+    var dir = m[0].num === 3 ? 1 : -1; //up or down? based on color
     removePieceFrom(m[1].num+dir, m[1].alf);
-    //set to default; will be used every time en passant is made
-    enP = false;
   } else {
     null;
   }

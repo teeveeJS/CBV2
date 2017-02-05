@@ -1,9 +1,7 @@
 var ps = []; //this array is probably useless
 //all the objects can be contained within board-array
 var white_move = true;
-var castle = false;
-var enP = false; //en passant
-var ep_sq = {alf: null, num: null};
+var ep_sq = {alf: null, num: null}; //probably won't be needed
 var moves = []; //for en passant, read the last index
 
 var board = [

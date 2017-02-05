@@ -23,7 +23,7 @@ function invertedBoard(){
 }
 
 function displayBoard(){
-  //console.clear();
+  console.clear();
   for(var i=7; i>=0; i--){
     var str = "";
     for(var j=0; j<8; j++){

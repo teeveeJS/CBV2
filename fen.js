@@ -22,6 +22,9 @@ function fenToPos(fen){
   var all = fen.split(" "); //first get rids of the back end of the String
   //must be of length 6
   var rank = all[0].split("/"); //splits into eight ranks
+  for(var i=0; i<rank.length; i++){
+    rank[i] = rank[i].split("");
+  }
 
 
 }

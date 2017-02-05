@@ -19,17 +19,21 @@ function isLegalPawn(piece, move){
   if(deltaAlf === 1 && dir*deltaNum === 1 && board[move[1].num][move[1].alf].color !== piece.color){
     return true;
   }
-  //en passant
-  if(deltaAlf === 1 && dir*deltaNum === 1 &&
-    equals(moves[moves.length-1], [{num: move[0].num+dir*2, alf: move[1].alf}, {num: move[0].num, alf: move[1].alf}])){
-    enP = true;
-    return true;
-  }
 
-  return false;
+  //the last case to check: en passant
+  return enPassant(move);
 
 }
 
+function enPassant(piece, move){
+  var deltaAlf = Math.abs(move[1].alf - move[0].alf);
+  var deltaNum = move[1].num - move[0].num;
+  var dir = Math.sign((piece.color === "w") - 0.5);
+  return deltaAlf === 1 && dir*deltaNum === 1 &&
+    equals(moves[moves.length-1], [{num: move[0].num+dir*2, alf: move[1].alf}, {num: move[0].num, alf: move[1].alf}]);
+}
+
+//promotion does not need to be checking in isLegalPawn because won't affect legality
 function promotion(piece, move){
   if(piece.name !== "p") return false;
   if(piece.color === "w" && move[1].num === 7 ||

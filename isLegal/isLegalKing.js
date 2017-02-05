@@ -1,12 +1,9 @@
 function isLegalKing(piece, move){
-  //ignores the possibility of check
+  //ignores the possibility of a check
   if(Math.abs(move[1].alf - move[0].alf) <= 1 || Math.abs(move[1].num - move[0].num) <= 1){
     return true;
-  } else if(checkCastle(piece, move)){
-    castle = true;
-    return true;
   }
-  return false;
+  return checkCastle(piece, move);
 }
 
 function checkCastle(piece, move){
