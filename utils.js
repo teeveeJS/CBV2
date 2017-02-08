@@ -3,6 +3,7 @@ var ps = []; //this array is probably useless
 var white_move = true;
 var ep_sq = {alf: null, num: null}; //probably won't be needed
 var moves = []; //for en passant, read the last index
+moves[0] = 0;
 
 var board = [
               [00, 01, 02, 03, 04, 05, 06, 07],
@@ -64,16 +65,4 @@ function setNewPieceTo(p, c, n, a){
 
 function capture(move){
   return board[move[1].num][move[1].alf].color !== undefined;
-}
-
-//could just use .toString(); thx penda
-function equals(o1, o2){
-  for(var i=0; i<o1.length; i++){
-    for(n in o1[i]){
-      if(o1[i][n] !== o2[i][n]){
-        return false;
-      }
-    }
-  }
-  return true;
 }

@@ -5,6 +5,12 @@ function CP(name, color, Alf, Num) {
   this.Num = Num;
   this.isCaptured = false; //OBSOLETE
   this.hasMoved = false; //will not matter unless pawn, king, or rook
+
+  this.moveTo = function(a, n){
+    this.Alf = a;
+    this.Num = n;
+    return this;
+  }
 };
 
 //currently just used for defaults
