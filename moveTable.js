@@ -26,7 +26,7 @@ function getMoves(init_sq){
   return moves;
 }
 
-function threats(color){
+function getMovesByColor(color){
   var threats = [];
 
   for(var n=0; n<8; n++){
@@ -40,8 +40,8 @@ function threats(color){
   return threats;
 }
 
-function listThreats(color){
-  var t = threats(color);
+function listMovesByColor(color){
+  var t = getMovesByColor(color);
 
 
   var b = [[], [], [], [], [], [], [], []];
