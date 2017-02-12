@@ -9,3 +9,7 @@
 #start_game{
   margin-left: 600px;
 }
+
+.piece_img{
+  visibility: hidden;
+}

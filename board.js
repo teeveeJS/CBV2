@@ -1,11 +1,10 @@
 function initBoard(){
   for(var i=0; i<ps.length; i++){
-    //console.log(i);
     board[ps[i].Num][ps[i].Alf] = ps[i];
-    //much easier to copy the object over to the board
   }
 }
 
+//TODO:implement rotation
 function invertedBoard(){
   //console.clear();
   for(var i=0; i<8; i++){

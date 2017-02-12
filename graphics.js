@@ -1,4 +1,5 @@
 var size = 480;
+var sq_size = size/8;
 
 window.onload = function(){
   document.body.style.backgroundColor = "#4d94ff";
@@ -21,12 +22,11 @@ window.onload = function(){
 
   createPieces();
   initBoard();
+  boardGraphics();
   displayBoard();//will be deprecated once graphics are implemented
 };
 
 function colorize(){
-  var sq_size = size/8;
-
   for(var i=0; i<8; i++){
     for(var j=0; j<8; j++){
       var ctx = document.getElementById("board").getContext("2d");
@@ -36,5 +36,22 @@ function colorize(){
       }
     }
   }
-  return sq_size;
+}
+
+function boardGraphics(){
+  for(var i=0; i<8; i++){
+    for(var j=0; j<8; j++){
+      var ctx = document.getElementById("board").getContext("2d");
+      var src = document.getElementById(board[j][i].color + board[j][i].name);
+      //console.log(i + " " + j + " " + src);
+      if(src !== null){
+        if(rotation){
+          ctx.drawImage(src, i*sq_size, (7-j)*sq_size, sq_size, sq_size);
+        } else {
+          ctx.drawImage(src, i*sq_size, j*sq_size, sq_size, sq_size);
+        }
+      }
+    }
+  }
+  return null;
 }

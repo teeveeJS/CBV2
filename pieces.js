@@ -6,7 +6,7 @@ function CP(name, color, Alf, Num) {
   this.isCaptured = false; //OBSOLETE
   this.hasMoved = false; //will not matter unless pawn, king, or rook
 
-  this.src = "img/" + color + name + ".gif";
+  //this.src = "img/" + color + name + ".gif";
 
   this.moveTo = function(a, n){
     this.Alf = a;
@@ -22,8 +22,7 @@ function createPieces(){
     ps[j] = new CP("p", "w", j, 1);
   };
   for(j=8; j<16; j++){
-    var temp = j-8;
-    ps[j] = new CP("p", "b", temp, 6);
+    ps[j] = new CP("p", "b", j-8, 6);
   };
   ps[16] = new CP("K", "w", 4, 0);
   ps[17] = new CP("K", "b", 4, 7);

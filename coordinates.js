@@ -51,9 +51,29 @@ function alfToNum(str){
   if(parseInt(start.alf) === NaN || parseInt(end.alf) === NaN){
     start = {alf: -1, num: -1};
     end = {alf: -1, num: -1};
-    //basically sets the objects to that piece will be null
+    //basically sets the objects so that piece will be null
   }
 
   var mov = [start, end];
   return mov;
+}
+
+function mouseToCoord(mouseX, mouseY){
+  var mT = parseInt(document.getElementById("board").style.marginTop) + 10;
+  var mL = parseInt(document.getElementById("board").style.marginLeft) + 10;
+
+  mouseX -= mL;
+  mouseY -= mT;
+
+  var sq = {
+    alf: Math.floor(mouseX/sq_size),
+    num: Math.floor(mouseY/sq_size)
+  }
+
+  if(rotation){
+    sq.num = 7 - sq.num;
+  }
+
+  console.log(sq);
+  return sq;
 }

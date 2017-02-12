@@ -30,6 +30,10 @@ var VALUES = {
 
 var result;
 
+var rotation = true;
+//true: white in front
+//false: black in front
+
 function isEmpty(n, a){
   //n (num) and a (alf) constitute the square
   return board[parseInt(n)][parseInt(a)].color === undefined;
