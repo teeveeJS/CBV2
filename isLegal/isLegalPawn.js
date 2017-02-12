@@ -41,13 +41,10 @@ function promotion(piece, move){
   return false;
 }
 
-getThreatsPawn(init_sq){
+function getThreatsPawn(init_sq){
   var threats = [];
-  var c = board[init_sq.num][init_sq.alf].color;
-  var dir = Math.sign((c === "w") - 0.5);
-  var left = board[init_sq.num+dir][init_sq.alf-1];
-  var right = board[init_sq.num+dir][init_sq.alf+1];
-  if(left.piece !== c) threats.push({num: init_sq.num+dir, alf: init_sq.alf-1});
-  if(right.piece !== c) threats.push({num: init_sq.num+dir, alf: init_sq.alf+1});
+  var dir = Math.sign((board[init_sq.num][init_sq.alf].color === "w") - 0.5);
+  threats.push({num: init_sq.num+dir, alf: init_sq.alf-1});
+  threats.push({num: init_sq.num+dir, alf: init_sq.alf+1});
   return threats;
 }

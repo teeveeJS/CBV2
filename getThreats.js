@@ -1,5 +1,8 @@
+//threat and protection are synonymous in this case
+
 function getThreats(init_sq){
   //init_sq is an object
+  //init_sq represents the initial square of the piece whose threats are checked
   //eg: init_sq === {num: 3, alf: 2}
 
   var moves = [];
@@ -13,6 +16,11 @@ function getThreats(init_sq){
         moves.push(threats[0]);
         if(threats.length === 2){
           moves.push(threats[1]);
+        }
+      } else if(p === "K"){
+        var thr = getThreatsKing(init_sq);
+        for(var i=0; i<thr.length; i++){
+          moves.push(thr[i]);
         }
       } else if(isLegal(board[init_sq.num][init_sq.alf], m)){
         moves.push({num: n, alf: a});
