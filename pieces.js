@@ -6,6 +6,8 @@ function CP(name, color, Alf, Num) {
   this.isCaptured = false; //OBSOLETE
   this.hasMoved = false; //will not matter unless pawn, king, or rook
 
+  this.src = "img/" + color + name + ".gif";
+
   this.moveTo = function(a, n){
     this.Alf = a;
     this.Num = n;

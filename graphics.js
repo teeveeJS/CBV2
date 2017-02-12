@@ -1,20 +1,21 @@
-var size = 400;
+var size = 480;
 
 window.onload = function(){
+  document.body.style.backgroundColor = "#4d94ff";
+
   var canvas = document.createElement("CANVAS");
   document.body.appendChild(canvas);
   canvas.setAttribute("id", "board");
-  canvas.style.backgroundColor = "black";
+  canvas.style.backgroundColor = "#ffffcc";
+  canvas.style.marginTop = "50px";
+  canvas.style.marginLeft = "50px";
 
   document.getElementById("start_game").addEventListener("click", new_game);
   document.getElementById("board").addEventListener("click", graphicsMove);
 
-  document.getElementById("board").style.height = size + "px";
-  document.getElementById("board").style.width = size + "px";
-  console.log('board size set to: ' + size);
-
-  document.getElementById("board").style.marginLeft = "-10px";
-  document.getElementById("board").style.marginTop = "-10px";
+  var can = document.getElementById("board");
+  can.height = size;
+  can.width = size;
 
   colorize();
 
@@ -24,15 +25,14 @@ window.onload = function(){
 };
 
 function colorize(){
-  var x = 32/3; //someone explain
-  var sq_size = size/x;
+  var sq_size = size/8;
 
-  for(var i=0; i<x; i++){
-    for(var j=0; j<x; j++){
+  for(var i=0; i<8; i++){
+    for(var j=0; j<8; j++){
       var ctx = document.getElementById("board").getContext("2d");
       if(i%2 === 0 && j%2 !== 0 || i%2 !== 0 && j%2 === 0){
-        ctx.fillStyle = "#adccff";
-        ctx.fillRect(i*sq_size, j*sq_size/2, sq_size, sq_size/2);//WHY DO I NEED TO DIVIDE BY 2???
+        ctx.fillStyle = "#663300";
+        ctx.fillRect(i*sq_size, j*sq_size, sq_size, sq_size);
       }
     }
   }
