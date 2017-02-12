@@ -39,16 +39,18 @@ function colorize(){
 }
 
 function boardGraphics(){
+  var ctx = document.getElementById("board").getContext("2d");
+  var src = document.getElementById("images");
+
   for(var i=0; i<8; i++){
     for(var j=0; j<8; j++){
-      var ctx = document.getElementById("board").getContext("2d");
-      var src = document.getElementById(board[j][i].color + board[j][i].name);
+      var sc = getPieceSrc(i, j);
       //console.log(i + " " + j + " " + src);
-      if(src !== null){
+      if(src !== null && sc !== null){
         if(rotation){
-          ctx.drawImage(src, i*sq_size, (7-j)*sq_size, sq_size, sq_size);
+          ctx.drawImage(src, sc.x, sc.y, 1000/3, 1000/3, i*sq_size, (7-j)*sq_size, sq_size, sq_size);
         } else {
-          ctx.drawImage(src, i*sq_size, j*sq_size, sq_size, sq_size);
+          ctx.drawImage(src, sc.x, sc.y, 1000/3, 1000/3, i*sq_size, j*sq_size, sq_size, sq_size);
         }
       }
     }

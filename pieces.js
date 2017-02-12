@@ -42,3 +42,23 @@ function createPieces(){
   ps[31] = new CP("N", "b", 6, 7);
   return ps;
 };
+
+function getPieceSrc(i, j){
+  var nc = board[j][i].color + board[j][i].name;
+  var sz = 1000/3;
+  switch(nc){
+    case "wK": return {x: 0, y: 0};
+    case "wQ": return {x: sz, y: 0};
+    case "wB": return {x: 2*sz, y: 0};
+    case "wN": return {x: 3*sz, y: 0};
+    case "wR": return {x: 4*sz, y: 0};
+    case "wp": return {x: 5*sz, y: 0};
+    case "bK": return {x: 0, y: sz};
+    case "bQ": return {x: sz, y: sz};
+    case "bB": return {x: 2*sz, y: sz};
+    case "bN": return {x: 3*sz, y: sz};
+    case "bR": return {x: 4*sz, y: sz};
+    case "bp": return {x: 5*sz, y: sz};
+    default: return null;
+  }
+}
