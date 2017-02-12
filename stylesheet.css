@@ -1,0 +1,11 @@
+*{
+  position: absolute;
+}
+
+#board{
+  background-color: #000000;
+}
+
+#start_game{
+  margin-left: 600px;
+}
