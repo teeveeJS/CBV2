@@ -1,5 +1,10 @@
 function isLegalRook(move){
-  if(move[0].num - move[1].num === 0 && move[0].alf - move[1].alf !== 0){
+  if(!isNaN(board[move[1].num][move[1].alf]) &&
+    board[move[1].num][move[1].alf].color === board[move[0].num][move[0].alf]){
+    //checks if the output and input squares have the same color piece
+    //repetitive but necessary for castling
+    return false;
+  } else if(move[0].num - move[1].num === 0 && move[0].alf - move[1].alf !== 0){
     return checkRank(move);
   } else if(move[0].num - move[1].num !== 0 && move[0].alf - move[1].alf === 0){
     return checkFile(move);

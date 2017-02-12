@@ -4,27 +4,18 @@ function isLegal(p, mv){//ayy p = mv
     return false;
   }
 
-
-  var x;
   switch(p.name){
     case "R":
-      x = isLegalRook(mv);
-      break;
+      return isLegalRook(mv);
     case "B":
-      x = isLegalBishop(mv);
-	    break;
+      return isLegalBishop(mv);
     case "N":
-      x = isLegalKnight(mv);
-			break;
+      return isLegalKnight(mv);
     case "Q":
-      x = isLegalRook(mv) || isLegalBishop(mv);
-			break;
+      return isLegalRook(mv) || isLegalBishop(mv);
     case "K":
-      x = isLegalKing(p, mv);
-			break;
+      return isLegalKing(p, mv);
     case "p":
-      x = isLegalPawn(p, mv);
-      break;
+      return isLegalPawn(p, mv);
   }
-  return x;
 }
