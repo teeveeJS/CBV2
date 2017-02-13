@@ -36,3 +36,13 @@ function checkFile(move){
   }
   return true;
 }
+
+function isRookThreat(move){
+  if(move[0].num - move[1].num === 0 && move[0].alf - move[1].alf !== 0){
+    return checkRank(move);
+  } else if(move[0].num - move[1].num !== 0 && move[0].alf - move[1].alf === 0){
+    return checkFile(move);
+  } else {
+    return false;
+  }
+}

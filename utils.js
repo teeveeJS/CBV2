@@ -35,6 +35,15 @@ var rotation = true;
 //true: white in front
 //false: black in front
 
+function constrain(num, min, max){
+  var ma = min || 0;
+  var mi = max || 7;
+
+  if(num > ma) return ma;
+  if(num < mi) return mi;
+  return num;
+}
+
 function isEmpty(n, a){
   //n (num) and a (alf) constitute the square
   return board[parseInt(n)][parseInt(a)].color === undefined;

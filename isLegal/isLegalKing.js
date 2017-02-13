@@ -1,7 +1,8 @@
 function isLegalKing(piece, move){
   //ignores the possibility of a check
   if(Math.abs(move[1].alf - move[0].alf) <= 1 && Math.abs(move[1].num - move[0].num) <= 1){
-    return isCheck(piece, move[1]);
+    //return isCheck(piece, move[1]);
+    return true;
   }
   return checkCastle(piece, move);
 }
@@ -38,19 +39,15 @@ function isCheck(piece, output){
 }
 
 //this will be required for the moveTable
-//TODO: come up with some loop for this
-function getThreatsKing(init_sq){
-  var threats = [];
-  threats.push({num: init_sq.num+1, alf: init_sq.alf+1});
-  threats.push({num: init_sq.num, alf: init_sq.alf+1});
-  threats.push({num: init_sq.num+1, alf: init_sq.alf});
-
-  threats.push({num: init_sq.num-1, alf: init_sq.alf-1});
-  threats.push({num: init_sq.num, alf: init_sq.alf-1});
-  threats.push({num: init_sq.num-1, alf: init_sq.alf});
-
-  threats.push({num: init_sq.num+1, alf: init_sq.alf-1});
-  threats.push({num: init_sq.num-1, alf: init_sq.alf+1});
-
-  return threats;
+function getThreatsKing(sq){
+  var q = [];
+  for(var i=-1; i<=1; i++){
+    for(var j=-1; j<=1; j++){
+      if(limTest(sq.num+i) && limTest(sq.alf+j)){
+        q.push({num: sq.num+i, alf: sq.alf+j});
+      }
+    }
+  }
+  q.splice(4, 1);
+  return q;
 }
