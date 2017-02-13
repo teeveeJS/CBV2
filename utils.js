@@ -44,6 +44,11 @@ function constrain(num, min, max){
   return num;
 }
 
+function limTest(num){
+  if(num > 7 || num < 0) return false;
+  return true;
+}
+
 function isEmpty(n, a){
   //n (num) and a (alf) constitute the square
   return board[parseInt(n)][parseInt(a)].color === undefined;

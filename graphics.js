@@ -105,3 +105,14 @@ function updateGraphicsEnPassant(p, m){
     ctx.clearRect(m[1].alf*sq_size, (m[1].num+dir)*sq_size, sq_size, sq_size);
   }
 }
+
+function updateGraphicsCapture(p, m){
+  var ctx = document.getElementById("board").getContext("2d");
+  var src = document.getElementById("images");
+
+  if(rotation){
+    ctx.clearRect(m[1].alf*sq_size, (7-m[1].num)*sq_size, sq_size, sq_size);
+  } else {
+    ctx.clearRect(m[1].alf*sq_size, m[1].num*sq_size, sq_size, sq_size);
+  }
+}

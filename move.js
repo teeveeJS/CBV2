@@ -78,6 +78,7 @@ function movePieces(p, m){
 
   //special conditions
   if(promotion(p, m)){
+    //TODO: handle BOTH capture and promotion (exd8=Q)
     var Pn;
     while(Pn !== "Q" && Pn !== "R" && Pn !== "B" && Pn !== "N"){
       Pn = prompt("Promote to: Q|R|B|N").toUpperCase();
@@ -89,11 +90,9 @@ function movePieces(p, m){
     var side = (r.Alf === 7) ? -1 : 1;
     var r_move = [{num: r.Num, alf: r.Alf}, {num: m[1].num, alf: m[1].alf+side}];
     moveRook(r, r_move);
-  } /*else if(capture(m)){
-    //not sure if any special actions need to be taken
-    //piece.isCaptured = true is probably the only one
-    //and even that is kinda useless, since ps[] is not used
-  } */else if(enPassant(p, m)){
+  } else if(capture(m)){
+    updateGraphicsCapture(p, m);
+  } else if(enPassant(p, m)){
     var dir = m[0].num === 3 ? 1 : -1; //up or down? based on color
     removePieceFrom(m[1].num+dir, m[1].alf);
     updateGraphicsEnPassant(p, m);

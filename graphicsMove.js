@@ -1,6 +1,6 @@
 function prelimCheck(sq){
   //mouseX = event.clientX
-  //console.log(event.clientX + " " + event.clientY);
+  console.log(event.clientX + " " + event.clientY);
   var sq = mouseToCoord(event.clientX, event.clientY);
 
   console.log(sq + " " + selectedSquare);
@@ -20,7 +20,7 @@ function prelimCheck(sq){
 //mostly recycled code
 function graphicsMove(m){
   selectedSquare = null;
-  
+
   var piece = board[m[0].num][m[0].alf];
 
   if(piece){
@@ -38,6 +38,8 @@ function graphicsMove(m){
       //document.getElementById("toMove").innerHTML = (white_move ? "White" : "Black") + " to move"));
       return null;
     } else {
+      console.log(piece);
+      console.log(m);
       alert("Make a legal move!");
       return null;
     }

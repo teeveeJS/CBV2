@@ -59,16 +59,18 @@ function alfToNum(str){
 }
 
 function mouseToCoord(mouseX, mouseY){
-  var mT = parseInt(document.getElementById("board").style.marginTop) + 10;
-  var mL = parseInt(document.getElementById("board").style.marginLeft) + 10;
+  var mT = parseInt(document.getElementById("board").style.marginTop) + 8;
+  var mL = parseInt(document.getElementById("board").style.marginLeft) + 8;
 
-  mouseX -= mL;
-  mouseY -= mT;
+  mX = mouseX - mL;
+  mY = mouseY - mT;
 
   var sq = {
-    alf: Math.floor(mouseX/sq_size),
-    num: Math.floor(mouseY/sq_size)
+    alf: Math.floor(mX/sq_size),
+    num: Math.floor(mY/sq_size)
   }
+
+  console.log(sq.num);
 
   if(rotation){
     sq.num = 7 - sq.num;
