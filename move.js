@@ -96,6 +96,7 @@ function movePieces(p, m){
   } */else if(enPassant(p, m)){
     var dir = m[0].num === 3 ? 1 : -1; //up or down? based on color
     removePieceFrom(m[1].num+dir, m[1].alf);
+    updateGraphicsEnPassant(p, m);
   } else {
     null;
   }
@@ -107,6 +108,8 @@ function movePieces(p, m){
 
   moves.push(m);
   white_move = !white_move;
+
+  updateGraphics(p, m);
 }
 
 function moveRook(p, m){

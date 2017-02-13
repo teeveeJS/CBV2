@@ -4,6 +4,7 @@ var white_move = true;
 var ep_sq = {alf: null, num: null}; //probably won't be needed
 var moves = []; //for en passant, read the last index
 moves[0] = 0;
+var selectedSquare = null;
 
 var board = [
               [00, 01, 02, 03, 04, 05, 06, 07],
