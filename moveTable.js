@@ -67,5 +67,6 @@ function listThreatsByColor(color){
     console.log(str);
   }
 
-  return b;
+  //return b;
+  return t;
 }

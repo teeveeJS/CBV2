@@ -1,8 +1,8 @@
 function isLegalKing(piece, move){
   //ignores the possibility of a check
   if(Math.abs(move[1].alf - move[0].alf) <= 1 && Math.abs(move[1].num - move[0].num) <= 1){
-    //return isCheck(piece, move[1]);
-    return true;
+    //console.log("test");
+    return !isInCheck(piece.color, move[1]);
   }
   return checkCastle(piece, move);
 }
@@ -27,16 +27,7 @@ function selectRook(move){
   }
 }
 
-//this could be optimized by having a function that gets all threats to one square
-function isCheck(piece, output){
-  var threats = (piece.color === "w") ? getThreatsByColor("b") : getThreatsByColor("w");
-  for(var i=0; i<threats.length; i++){
-    if(threats[i].alf === output.alf && threats[i] === output.num){
-      return true;
-    }
-  }
-  return false;
-}
+
 
 //this will be required for the moveTable
 function getThreatsKing(sq){
@@ -48,18 +39,18 @@ function getThreatsKing(sq){
       }
     }
   }
-  q.splice(4, 1);
+  q.splice(4, 1); //removes the threat from the square where the king is
+  //the king can't move to its own square
   return q;
 }
 
-function isInCheck(color){
-  var kingLocation = getKing(color);
-  var c = (color === "w") ? "b" : "w";
-  var t = getThreatsByColor(c);
+function isInCheck(color, l){
+  var kingLocation = l || getKing(color); //if not given by the user;
+  var t = listThreatsByColor((color === "w") ? "b" : "w");
 
   for(var i=0; i<t.length; i++){
     for(var j=0; j<t[i].length; j++){
-      if(t[i][j].num === kingLocation[0] && t[i][j].alf === kingLocation[1]){
+      if(t[i][j].num === kingLocation.num && t[i][j].alf === kingLocation.alf){
         return true;
       }
     }
@@ -72,7 +63,7 @@ function getKing(color){
   for(var i=0; i<8; i++){
     for(var j=0; j<8; j++){
       if(board[j][i].color === color && board[j][i].name === "K"){
-        return [j, i];
+        return {num: j, alf: i};
       }
     }
   }

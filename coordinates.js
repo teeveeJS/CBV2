@@ -70,12 +70,12 @@ function mouseToCoord(mouseX, mouseY){
     num: Math.floor(mY/sq_size)
   }
 
-  console.log(sq.num);
+  //console.log(sq.num);
 
   if(rotation){
     sq.num = 7 - sq.num;
   }
 
-  console.log(sq);
+  //console.log(sq);
   return sq;
 }

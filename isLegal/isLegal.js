@@ -4,18 +4,31 @@ function isLegal(p, mv){//ayy p = mv
     return false;
   }
 
+  var x;
   switch(p.name){
     case "R":
-      return isLegalRook(mv);
+      x = isLegalRook(mv);
+      break;
     case "B":
-      return isLegalBishop(mv);
+      x = isLegalBishop(mv);
+      break;
     case "N":
-      return isLegalKnight(mv);
+      x = isLegalKnight(mv);
+      break;
     case "Q":
-      return isLegalRook(mv) || isLegalBishop(mv);
+      x = isLegalRook(mv) || isLegalBishop(mv);
+      break;
     case "K":
-      return isLegalKing(p, mv);
+      x = isLegalKing(p, mv);
+      break;
     case "p":
-      return isLegalPawn(p, mv);
+      x = isLegalPawn(p, mv);
+      break;
   }
+
+  /*
+  1. assume the move has been made
+  1.1. probably create a temporary duplicate board
+  2. return !isInCheck((white_move) ? "w" : "b") in the position where the move has been made
+  */
 }
