@@ -1,12 +1,11 @@
 var ps = []; //this array is probably useless
 //all the objects can be contained within board-array
-var white_move = true;
-var ep_sq = {alf: null, num: null}; //probably won't be needed
-var moves = []; //for en passant, read the last index
-moves[0] = 0;
-var selectedSquare = null;
+var MOVE_WHITE = true;
+var MOVES_LIST = []; //for en passant, read the last index
+MOVES_LIST[0] = 0;
+var SELECTED_SQAURE = null;
 
-var board = [
+var UNIVERSAL_BOARD = [
               [00, 01, 02, 03, 04, 05, 06, 07],
               [10, 11, 12, 13, 14, 15, 16, 17],
               [20, 21, 22, 23, 24, 25, 26, 27],
@@ -29,43 +28,42 @@ var VALUES = {
   p: 1
 };
 
-var result;
+var RESULT;
 
-var rotation = true;
+var ROTATION = true;
 //true: white in front
 //false: black in front
 
-function constrain(num, min, max){
+function constrain(num, min, max) {
   var ma = min || 0;
   var mi = max || 7;
 
-  if(num > ma) return ma;
-  if(num < mi) return mi;
+  if (num > ma) return ma;
+  if (num < mi) return mi;
   return num;
 }
 
-function limTest(num){
-  if(num > 7 || num < 0) return false;
+function limTest(num) {
+  if (num > 7 || num < 0) return false;
   return true;
 }
 
-function isEmpty(n, a){
+function isEmpty(n, a, board) {
   //n (num) and a (alf) constitute the square
   return board[parseInt(n)][parseInt(a)].color === undefined;
 }
 
-//basically the opposite of isEmpty() with the addition of checking for the correct color
 //OBSOLETE (pretty much)
-function hasPiece(start){
+function hasPiece(start, board) {
   var sq = board[parseInt(start.num)][parseInt(start.alf)];
   return sq.color === "w" && white_move ||
-        sq.color === "b" && !white_move; //sq.substring(0,1) === "b" can probably be removed
+        sq.color === "b" && !white_move;
 }
 
 //defunct since ps[] not in use
-function getContent(n, a){
-  for(var i=0; i<ps.length; i++){
-    if(ps[i].Num === n && ps[i].Alf === a){
+function getContent(n, a/*,board*/) {
+  for (var i=0; i<ps.length; i++) {
+    if (ps[i].Num === n && ps[i].Alf === a) {
       return ps[i];
     }
   }
@@ -73,15 +71,15 @@ function getContent(n, a){
   //now that i think of this...probably not all that useful
 }
 
-function removePieceFrom(n, a){
+function removePieceFrom(n, a, board) {
   return board[n][a] = n*10+a;
   //however, doesn't delete the piece from the ps array
 }
 
-function setNewPieceTo(p, c, n, a){
+function setNewPieceTo(p, c, n, a, board) {
   return board[n][a] = new CP (p, c, a, n);
 }
 
-function capture(move){
+function capture(move, board) {
   return board[move[1].num][move[1].alf].color !== undefined;
 }

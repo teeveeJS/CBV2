@@ -7,21 +7,21 @@ function CP(name, color, Alf, Num) {
   this.hasMoved = false; //will not matter unless pawn, king, or rook
 
   //this.src = "img/" + color + name + ".gif";
-
-  this.moveTo = function(a, n){
-    this.Alf = a;
-    this.Num = n;
-    return this;
-  }
 };
 
+CP.prototype.moveTo = function(a, n) {
+  this.Alf = a;
+  this.Num = n;
+  return this;
+}
+
 //currently just used for defaults
-function createPieces(){
+function createPieces() {
   ps = []; //empties the array for a new game
-  for (j=0; j<8; j++) {
+  for (j = 0; j < 8; j++) {
     ps[j] = new CP("p", "w", j, 1);
   };
-  for(j=8; j<16; j++){
+  for(j = 8; j < 16; j++){
     ps[j] = new CP("p", "b", j-8, 6);
   };
   ps[16] = new CP("K", "w", 4, 0);
@@ -43,22 +43,22 @@ function createPieces(){
   return ps;
 };
 
-function getPieceSrc(i, j){
+function getPieceSrc(i, j, board) {
   var nc = board[j][i].color + board[j][i].name;
-  var sz = 1000/3;
-  switch(nc){
+  var sz = 1000 / 3;
+  switch (nc) {
     case "wK": return {x: 0, y: 0};
     case "wQ": return {x: sz, y: 0};
-    case "wB": return {x: 2*sz, y: 0};
-    case "wN": return {x: 3*sz, y: 0};
-    case "wR": return {x: 4*sz, y: 0};
-    case "wp": return {x: 5*sz, y: 0};
+    case "wB": return {x: 2 * sz, y: 0};
+    case "wN": return {x: 3 * sz, y: 0};
+    case "wR": return {x: 4 * sz, y: 0};
+    case "wp": return {x: 5 * sz, y: 0};
     case "bK": return {x: 0, y: sz};
     case "bQ": return {x: sz, y: sz};
-    case "bB": return {x: 2*sz, y: sz};
-    case "bN": return {x: 3*sz, y: sz};
-    case "bR": return {x: 4*sz, y: sz};
-    case "bp": return {x: 5*sz, y: sz};
+    case "bB": return {x: 2 * sz, y: sz};
+    case "bN": return {x: 3 * sz, y: sz};
+    case "bR": return {x: 4 * sz, y: sz};
+    case "bp": return {x: 5 * sz, y: sz};
     default: return null;
   }
 }

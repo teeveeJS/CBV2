@@ -3,11 +3,11 @@
 //starting position
 //rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
 
-function posToFen(){
+function posToFen() {
 
 }
 
-function fenToPos(fen){
+function fenToPos(fen) {
   var b = [
             [00, 01, 02, 03, 04, 05, 06, 07],
             [10, 11, 12, 13, 14, 15, 16, 17],
@@ -22,13 +22,13 @@ function fenToPos(fen){
   var all = fen.split(" "); //first get rids of the back end of the String
   //must be of length 6
   var rank = all[0].split("/"); //splits into eight ranks
-  for(var i=0; i<rank.length; i++){
+  for (var i = 0; i < rank.length; i++) {
     rank[i] = rank[i].split("");
   }
 
 
 }
 
-function isUpperCase(str){
+function isUpperCase(str) {
   return str === str.isUpperCase();
 }

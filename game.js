@@ -1,9 +1,7 @@
-function new_game(){
+function new_game() {
   //createPieces();
   //initBoard();
-  white_move = true;
-  castle = false;
-  enP = false;
-  moves = [];
-  move(prompt("white to move"));
+  MOVE_WHITE = true;
+  MOVES_LIST = [];
+  move(prompt("white to move"), UNIVERSAL_BOARD);
 }

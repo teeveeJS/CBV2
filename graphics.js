@@ -1,7 +1,7 @@
-var size = 480;
-var sq_size = size/8;
+var SIZE = 480;
+var SQ_SIZE = SIZE / 8;
 
-window.onload = function(){
+window.onload = function() {
   document.body.style.backgroundColor = "#4d94ff";
 
   var canvasB = document.createElement("CANVAS");
@@ -23,96 +23,96 @@ window.onload = function(){
   document.getElementById("board").addEventListener("click", prelimCheck);
 
   var can = document.getElementById("board");
-  can.height = size;
-  can.width = size;
+  can.height = SIZE;
+  can.width = SIZE;
 
   var canB = document.getElementById("board_background");
-  canB.height = size;
-  canB.width = size;
+  canB.height = SIZE;
+  canB.width = SIZE;
 
   colorize();
 
   createPieces();
-  initBoard();
+  initBoard(UNIVERSAL_BOARD);
 
-  initGraphics();
+  initGraphics(UNIVERSAL_BOARD);
 
-  displayBoard();//will be deprecated once graphics are implemented
-};
+  displayBoard(UNIVERSAL_BOARD);//will be deprecated once graphics are implemented
+}
 
-function colorize(){
-  for(var i=0; i<8; i++){
-    for(var j=0; j<8; j++){
+function colorize() {
+  for (var i = 0; i < 8; i++) {
+    for (var j = 0; j < 8; j++) {
       var ctx = document.getElementById("board_background").getContext("2d");
-      if(i%2 === 0 && j%2 !== 0 || i%2 !== 0 && j%2 === 0){
+      if (i % 2 === 0 && j % 2 !== 0 || i % 2 !== 0 && j % 2 === 0) {
         ctx.fillStyle = "#663300";
-        ctx.fillRect(i*sq_size, j*sq_size, sq_size, sq_size);
+        ctx.fillRect(i * SQ_SIZE, j * SQ_SIZE, SQ_SIZE, SQ_SIZE);
       }
     }
   }
 }
 
-function initGraphics(){
+function initGraphics(board) {
   var ctx = document.getElementById("board").getContext("2d");
   var src = document.getElementById("images");
 
-  for(var i=0; i<8; i++){
-    for(var j=0; j<8; j++){
-      var sc = getPieceSrc(i, j);
+  for (var i = 0; i < 8; i++) {
+    for (var j = 0; j < 8; j++) {
+      var sc = getPieceSrc(i, j, board);
       //console.log(i + " " + j + " " + src);
-      if(src !== null && sc !== null){
-        if(rotation){
-          ctx.drawImage(src, sc.x, sc.y, 1000/3, 1000/3, i*sq_size, (7-j)*sq_size, sq_size, sq_size);
+      if (src !== null && sc !== null) {
+        if (ROTATION) {
+          ctx.drawImage(src, sc.x, sc.y, 1000 / 3, 1000 / 3, i * SQ_SIZE, (7 - j) * SQ_SIZE, SQ_SIZE, SQ_SIZE);
         } else {
-          ctx.drawImage(src, sc.x, sc.y, 1000/3, 1000/3, i*sq_size, j*sq_size, sq_size, sq_size);
+          ctx.drawImage(src, sc.x, sc.y, 1000 / 3, 1000 / 3, i * SQ_SIZE, j * SQ_SIZE, SQ_SIZE, SQ_SIZE);
         }
       } else {
-        ctx.clearRect(i*sq_size, j*sq_size, sq_size, sq_size);
+        ctx.clearRect(i * SQ_SIZE, j * SQ_SIZE, SQ_SIZE, SQ_SIZE);
       }
     }
   }
   return null;
 }
 
-function updateGraphics(p, m){
+function updateGraphics(p, m, board) {
   var ctx = document.getElementById("board").getContext("2d");
   var src = document.getElementById("images");
-  var sc = getPieceSrc(m[1].alf, m[1].num);
+  var sc = getPieceSrc(m[1].alf, m[1].num, board);
 
-  if(rotation){
-    ctx.clearRect(m[0].alf*sq_size, (7-m[0].num)*sq_size, sq_size, sq_size);
+  if (ROTATION) {
+    ctx.clearRect(m[0].alf * SQ_SIZE, (7 - m[0].num) * SQ_SIZE, SQ_SIZE, SQ_SIZE);
   } else {
-    ctx.clearRect(m[0].alf*sq_size, m[0].num*sq_size, sq_size, sq_size);
+    ctx.clearRect(m[0].alf * SQ_SIZE, m[0].num * SQ_SIZE, SQ_SIZE, SQ_SIZE);
   }
 
-  if(rotation){
-    ctx.drawImage(src, sc.x, sc.y, 1000/3, 1000/3, m[1].alf*sq_size, (7-m[1].num)*sq_size, sq_size, sq_size);
+  if (ROTATION) {
+    ctx.drawImage(src, sc.x, sc.y, 1000 / 3, 1000 / 3, m[1].alf * SQ_SIZE, (7 - m[1].num) * SQ_SIZE, SQ_SIZE, SQ_SIZE);
   } else {
-    ctx.drawImage(src, sc.x, sc.y, 1000/3, 1000/3, m[1].alf*sq_size, m[1].num*sq_size, sq_size, sq_size);
+    ctx.drawImage(src, sc.x, sc.y, 1000 / 3, 1000 / 3, m[1].alf * SQ_SIZE, m[1].num * SQ_SIZE, SQ_SIZE, SQ_SIZE);
   }
 
 }
 
-function updateGraphicsEnPassant(p, m){
+function updateGraphicsEnPassant(p, m, board) {
   var dir = m[0].num === 3 ? 1 : -1;
   var ctx = document.getElementById("board").getContext("2d");
   var src = document.getElementById("images");
-  var sc = getPieceSrc(m[1].alf, m[1].num);
+  var sc = getPieceSrc(m[1].alf, m[1].num, board);
 
-  if(rotation){
-    ctx.clearRect(m[1].alf*sq_size, (7-m[1].num-dir)*sq_size, sq_size, sq_size);
+  if (ROTATION) {
+    ctx.clearRect(m[1].alf * SQ_SIZE, (7 - m[1].num - dir) * SQ_SIZE, SQ_SIZE, SQ_SIZE);
   } else {
-    ctx.clearRect(m[1].alf*sq_size, (m[1].num+dir)*sq_size, sq_size, sq_size);
+    ctx.clearRect(m[1].alf * SQ_SIZE, (m[1].num + dir) * SQ_SIZE, SQ_SIZE, SQ_SIZE);
   }
 }
 
-function updateGraphicsCapture(p, m){
+function updateGraphicsCapture(p, m) {
   var ctx = document.getElementById("board").getContext("2d");
   var src = document.getElementById("images");
 
-  if(rotation){
-    ctx.clearRect(m[1].alf*sq_size, (7-m[1].num)*sq_size, sq_size, sq_size);
+  if (ROTATION){
+    ctx.clearRect(m[1].alf * SQ_SIZE, (7 - m[1].num) * SQ_SIZE, SQ_SIZE, SQ_SIZE);
   } else {
-    ctx.clearRect(m[1].alf*sq_size, m[1].num*sq_size, sq_size, sq_size);
+    ctx.clearRect(m[1].alf * SQ_SIZE, m[1].num * SQ_SIZE, SQ_SIZE, SQ_SIZE);
   }
 }

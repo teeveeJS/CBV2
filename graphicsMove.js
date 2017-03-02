@@ -1,38 +1,38 @@
-function prelimCheck(event){
+function prelimCheck(event) {
   //mouseX = event.clientX
   //console.log(event.clientX + " " + event.clientY);
   var sq = mouseToCoord(event.clientX, event.clientY);
 
   //console.log(sq + " " + selectedSquare);
 
-  if(selectedSquare === null){
-    selectedSquare = sq;
+  if (SELECTED_SQAURE === null) {
+    SELECTED_SQAURE = sq;
     return null;
-  } else if(selectedSquare === sq){
-    selectedSquare = null;
+  } else if (SELECTED_SQAURE === sq) {
+    SELECTED_SQAURE = null;
     return null;
   } else {
     //has clicked two distinct squares
-    graphicsMove([selectedSquare, sq]);
+    graphicsMove([SELECTED_SQAURE, sq], UNIVERSAL_BOARD);
   }
 }
 
 //mostly recycled code
-function graphicsMove(m){
-  selectedSquare = null;
+function graphicsMove(m) {
+  SELECTED_SQAURE = null;
 
-  var piece = board[m[0].num][m[0].alf];
+  var piece = UNIVERSAL_BOARD[m[0].num][m[0].alf];
 
-  if(piece){
+  if (piece) {
     //to check that it is correct player's turn
-    if(!white_move && piece.color === "w" || white_move && piece.color === "b"){
+    if (!MOVE_WHITE && piece.color === "w" || MOVE_WHITE && piece.color === "b") {
       alert("Tata pelia pelataan vuorotellen! - K.K.");
       return null;
     }
 
-    if(isLegal(piece, m)){
-      movePieces(piece, m);
-      displayBoard();
+    if (isLegal(piece, m, UNIVERSAL_BOARD)) {
+      movePieces(piece, m, UNIVERSAL_BOARD);
+      displayBoard(UNIVERSAL_BOARD);
 
       //restarts the process...kinda
       //document.getElementById("toMove").innerHTML = (white_move ? "White" : "Black") + " to move"));

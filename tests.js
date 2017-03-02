@@ -1,3 +1,5 @@
+/*
+
 //this could be optimized by having a function that gets all threats to one square
 function isCheck(piece, output){
   var threats = (piece.color === "w") ? getThreatsByColor("b") : getThreatsByColor("w");
@@ -10,4 +12,4 @@ function isCheck(piece, output){
     }
   }
   return false;
-}
+}*/

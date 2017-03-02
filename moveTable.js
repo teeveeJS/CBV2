@@ -9,26 +9,26 @@ the difference between the two functions is that the will use different isLegalP
 
 
 //LEGAL MOVES
-function listMovesByColor(color){
-  var t = getMovesByColor(color);
+function listMovesByColor(color, board) {
+  var t = getMovesByColor(color, board);
 
   var b = [[], [], [], [], [], [], [], []];
-  for(var i=0; i<8; i++){
-    for(var j=0; j<8; j++){
+  for (var i = 0; i < 8; i++) {
+    for (var j = 0; j < 8; j++) {
       b[i][j] = "o";
     }
   }
 
-  for(var i=0; i<t.length; i++){
-    for(var j=0; j<t[i].length; j++){
+  for (var i = 0; i < t.length; i++) {
+    for (var j = 0; j < t[i].length; j++) {
       b[t[i][j].num][t[i][j].alf] = "x";
     }
 
   }
 
-  for(var i=7; i>=0; i--){
+  for (var i = 7; i >= 0; i--) {
     var str = i.toString() + " ";
-    for(var j=0; j<8; j++){
+    for (var j = 0; j < 8; j++) {
       str += b[i][j] + "  ";
     }
     console.log(str);
@@ -42,26 +42,25 @@ function listMovesByColor(color){
 //THREATS
 
 
-function listThreatsByColor(color){
-  var t = getThreatsByColor(color);
+function listThreatsByColor(color, board) {
+  var t = getThreatsByColor(color, board);
 
   var b = [[], [], [], [], [], [], [], []];
-  for(var i=0; i<8; i++){
-    for(var j=0; j<8; j++){
+  for (var i = 0; i < 8; i++) {
+    for (var j = 0; j < 8; j++) {
       b[i][j] = "o";
     }
   }
 
-  for(var i=0; i<t.length; i++){
-    for(var j=0; j<t[i].length; j++){
+  for (var i = 0; i < t.length; i++) {
+    for (var j = 0; j < t[i].length; j++) {
       b[t[i][j].num][t[i][j].alf] = "x";
     }
-
   }
 
-  for(var i=7; i>=0; i--){
+  for (var i = 7; i >=0; i--) {
     var str = i.toString() + " ";
-    for(var j=0; j<8; j++){
+    for (var j = 0; j < 8; j++) {
       str += b[i][j] + "  ";
     }
     console.log(str);

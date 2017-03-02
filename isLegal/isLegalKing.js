@@ -1,24 +1,28 @@
-function isLegalKing(piece, move){
+function isLegalKing(piece, move, board) {
   //ignores the possibility of a check
-  if(Math.abs(move[1].alf - move[0].alf) <= 1 && Math.abs(move[1].num - move[0].num) <= 1){
+  if (Math.abs(move[1].alf - move[0].alf) <= 1 && Math.abs(move[1].num - move[0].num) <= 1) {
     //console.log("test");
-    return !isInCheck(piece.color, move[1]);
+    return !isInCheck(piece.color, move[1], board);
   }
-  return checkCastle(piece, move);
+  return checkCastle(piece, move, board);
 }
 
-function checkCastle(piece, move){
-  var rk = selectRook(move);
+function checkCastle(piece, move, board) {
+  var rk = selectRook(move, board);
   var dir = (rk.Alf === 0) ? 1 : -1;
-  var inBetween = {num: move[1].num, alf: piece.alf+dir};
-  return Math.abs(move[1].alf - move[0].alf) === 2 && move[1].num === move[0].num &&
+  var inBetween = {
+    num: move[1].num,
+    alf: piece.alf + dir
+  }
+  return Math.abs(move[1].alf - move[0].alf) === 2 &&
+      move[1].num === move[0].num &&
       !rk.hasMoved && !piece.hasMoved &&
       !isCheck(piece, move[1]) && !isCheck(piece, inBetween) &&
       isLegalRook([{num: rk.Num, alf: rk.Alf}, {num: rk.Num, alf: piece.alf + dir}]);
 }
 
-function selectRook(move){
-  switch(move[1].alf + move[1].num){
+function selectRook(move, board) {
+  switch (move[1].alf + move[1].num) {
     case 2: return board[0][0];
     case 6: return board[0][7];
     case 9: return board[7][0];
@@ -30,11 +34,11 @@ function selectRook(move){
 
 
 //this will be required for the moveTable
-function getThreatsKing(sq){
+function getThreatsKing(sq) {
   var q = [];
-  for(var i=-1; i<=1; i++){
-    for(var j=-1; j<=1; j++){
-      if(limTest(sq.num+i) && limTest(sq.alf+j)){
+  for (var i = -1; i <= 1; i++) {
+    for (var j = -1; j <= 1; j++) {
+      if (limTest(sq.num + i) && limTest(sq.alf + j)) {
         q.push({num: sq.num+i, alf: sq.alf+j});
       }
     }
@@ -44,25 +48,25 @@ function getThreatsKing(sq){
   return q;
 }
 
-function isInCheck(color, l){
-  var kingLocation = l || getKing(color); //if not given by the user;
-  var t = listThreatsByColor((color === "w") ? "b" : "w");
+function isInCheck(color, l, board) {
+  var kingLocation = l || getKing(color, board); //if not given by the user;
+  var t = listThreatsByColor((color === "w") ? "b" : "w", board);
 
-  for(var i=0; i<t.length; i++){
-    for(var j=0; j<t[i].length; j++){
-      if(t[i][j].num === kingLocation.num && t[i][j].alf === kingLocation.alf){
+  for (var i = 0; i < t.length; i++) {
+    for (var j = 0; j < t[i].length; j++){
+      if(t[i][j].num === kingLocation.num && t[i][j].alf === kingLocation.alf) {
         return true;
       }
     }
-
   }
+
   return false;
 }
 
-function getKing(color){
-  for(var i=0; i<8; i++){
-    for(var j=0; j<8; j++){
-      if(board[j][i].color === color && board[j][i].name === "K"){
+function getKing(color, board) {
+  for (var i = 0; i < 8; i++) {
+    for (var j = 0; j < 8; j++) {
+      if (board[j][i].color === color && board[j][i].name === "K") {
         return {num: j, alf: i};
       }
     }

@@ -1,20 +1,20 @@
-function move(double_coord){
+function move(double_coord, board) {
   //checks for the termination of the game
-  if(double_coord.toUpperCase() === "RESIGN"){
-    if(white_move) result = "0-1";
-    else result = "1-0";
-    console.log("Game Over! " + result);
+  if (double_coord.toUpperCase() === "RESIGN") {
+    if (MOVE_WHITE) RESULT = "0-1";
+    else RESULT = "1-0";
+    console.log("Game Over! " + RESULT);
     return null;
-  } else if(double_coord.toUpperCase() === "DRAW"){
-    result = "1/2-1/2";
-    console.log("Game Over! " + result);
+  } else if (double_coord.toUpperCase() === "DRAW") {
+    RESULT = "1/2-1/2";
+    console.log("Game Over! " + RESULT);
     return null;
-  } else if(double_coord.toUpperCase() === "ADJOURN"){
-    result = "*";
-    console.log("Game Over! " + result);
+  } else if (double_coord.toUpperCase() === "ADJOURN") {
+    RESULT = "*";
+    console.log("Game Over! " + RESULT);
     return null;
-  } else if(double_coord.length !== 5){
-    move(prompt("Illegal notation!"));
+  } else if (double_coord.length !== 5) {
+    move(prompt("Illegal notation!"), board);
     return null;
   }
 
@@ -22,32 +22,34 @@ function move(double_coord){
   //m is an array of two objects: start and end
   var piece = board[parseInt(m[0].num)][parseInt(m[0].alf)];
 
-  if(piece){
+  console.log(piece);
+
+  if (piece) {
     //to check that it is correct player's turn
-    if(!white_move && piece.color === "w" ||
-      white_move && piece.color === "b"){
-        move(prompt("Not your turn!"));
+    if (!MOVE_WHITE && piece.color === "w" ||
+      MOVE_WHITE && piece.color === "b") {
+        move(prompt("Not your turn!"), board);
         return null;
       }
 
-    if(isLegal(piece, m)){
+    if (isLegal(piece, m, board)) {
       //perform the move
       //console.log(m);
       //var notation = toAlgebraic(m);
       //console.log(notation);
-      movePieces(piece, m);
-      displayBoard();
+      movePieces(piece, m, board);
+      displayBoard(board);
 
       //restarts the process
-      move(prompt((white_move ? "White" : "Black") + " to move"));
+      move(prompt((MOVE_WHITE ? "White" : "Black") + " to move"), board);
       return null;
     } else {
-      move(prompt("Make a legal move!"));
+      move(prompt("Make a legal move!"), board);
       return null;
     }
   } else {
     //call the prompt
-    move(prompt("No piece selected!"));
+    move(prompt("No piece selected!"), board);
     return null;
   }
 
@@ -67,55 +69,57 @@ function move(double_coord){
 
 }
 
-function movePieces(p, m){
-  console.clear();
+function movePieces(p, m, board) {
+  //console.clear();
 
-  var notation = toAlgebraic(m);
+  var notation = toAlgebraic(m, board);
   console.log(notation);
 
   //copies the object from the initial square to the output square
   board[m[1].num][m[1].alf] = board[m[0].num][m[0].alf];
 
   //special conditions
-  if(promotion(p, m)){
+  if (promotion(p, m, board)) {
     //TODO: handle BOTH capture and promotion (exd8=Q)
     var Pn;
-    while(Pn !== "Q" && Pn !== "R" && Pn !== "B" && Pn !== "N"){
+    while (Pn !== "Q" && Pn !== "R" && Pn !== "B" && Pn !== "N") {
       Pn = prompt("Promote to: Q|R|B|N").toUpperCase();
     }
     board[m[1].num][m[1].alf].name = Pn;
-  } else if(checkCastle(p, m)){
+  } else if (checkCastle(p, m, board)) {
     //moves the rook
-    var r = selectRook(m);
+    var r = selectRook(m, board);
     var side = (r.Alf === 7) ? -1 : 1;
-    var r_move = [{num: r.Num, alf: r.Alf}, {num: m[1].num, alf: m[1].alf+side}];
-    moveRook(r, r_move);
-  } else if(capture(m)){
-    updateGraphicsCapture(p, m);
-  } else if(enPassant(p, m)){
+    var r_move = [{num: r.Num, alf: r.Alf}, {num: m[1].num, alf: m[1].alf + side}];
+    moveRook(r, r_move, board);
+  } else if (capture(m, board)) {
+    updateGraphicsCapture(p, m, board);
+  } else if (enPassant(p, m, board)) {
     var dir = m[0].num === 3 ? 1 : -1; //up or down? based on color
-    removePieceFrom(m[1].num+dir, m[1].alf);
-    updateGraphicsEnPassant(p, m);
+    removePieceFrom(m[1].num + dir, m[1].alf, board);
+    updateGraphicsEnPassant(p, m, board);
   } else {
     null;
   }
 
 
   //sets the initial square back to normal
-  removePieceFrom(m[0].num, m[0].alf);
+  removePieceFrom(m[0].num, m[0].alf, board);
   board[m[1].num][m[1].alf].hasMoved = true;
 
-  moves.push(m);
-  white_move = !white_move;
+  MOVES_LIST.push(m);
+  MOVE_WHITE = !MOVE_WHITE;
 
-  updateGraphics(p, m);
+  updateGraphics(p, m, board);
 }
 
-function moveRook(p, m){
+function moveRook(p, m, board) {
   //copies the object from the initial square to the output square
   board[m[1].num][m[1].alf] = board[m[0].num][m[0].alf];
 
   //sets the initial square back to normal
-  removePieceFrom(m[0].num, m[0].alf);
+  removePieceFrom(m[0].num, m[0].alf, board);
   board[m[1].num][m[1].alf].hasMoved = true;
+
+  return board;
 }
