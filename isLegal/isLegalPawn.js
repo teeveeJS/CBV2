@@ -1,4 +1,8 @@
 function isLegalPawn(piece, move, board) {
+
+  //redundant, but necessary for checking check
+  if (move[0].alf === move[1].alf && move[0].num === move[1].num) return false;
+
   var deltaAlf = Math.abs(move[1].alf - move[0].alf);
   var deltaNum = move[1].num - move[0].num;
 

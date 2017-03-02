@@ -1,4 +1,8 @@
 function isLegalBishop(move, board) {
+
+  //redundant, but necessary for checking check
+  if (move[0].alf === move[1].alf && move[0].num === move[1].num) return false;
+
   var deltaAlf = Math.abs(move[0].alf - move[1].alf);
   var deltaNum = Math.abs(move[0].num - move[1].num);
   var dirAlf = Math.sign(move[1].alf - move[0].alf);

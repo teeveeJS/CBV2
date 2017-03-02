@@ -1,5 +1,8 @@
 function isLegalKing(piece, move, board) {
-  //ignores the possibility of a check
+
+  //redundant, but necessary for checking check
+  if (move[0].alf === move[1].alf && move[0].num === move[1].num) return false;
+
   if (Math.abs(move[1].alf - move[0].alf) <= 1 && Math.abs(move[1].num - move[0].num) <= 1) {
     //console.log("test");
     return !isInCheck(piece.color, move[1], board);

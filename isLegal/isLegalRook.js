@@ -1,4 +1,8 @@
 function isLegalRook(move, board) {
+
+  //redundant, but necessary for checking check
+  if (move[0].alf === move[1].alf && move[0].num === move[1].num) return false;
+
   if (!isNaN(board[move[1].num][move[1].alf]) &&
     board[move[1].num][move[1].alf].color === board[move[0].num][move[0].alf]) {
     //checks if the output and input squares have the same color piece
