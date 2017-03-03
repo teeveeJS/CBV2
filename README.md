@@ -1,4 +1,5 @@
 # CBV2
 
-A not-so-visual approach to a functional chessboard
-version 2.0
+ChessBoard version 2.999999
+
+It's perfect
