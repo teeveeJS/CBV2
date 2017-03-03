@@ -5,7 +5,7 @@ function isLegalKing(piece, move, board) {
 
   if (Math.abs(move[1].alf - move[0].alf) <= 1 && Math.abs(move[1].num - move[0].num) <= 1) {
     //console.log("test");
-    return !isInCheck(piece.color, move[1], board);
+    return !isInCheck(piece.color, board, move[1]);
   }
   return checkCastle(piece, move, board);
 }
@@ -20,8 +20,8 @@ function checkCastle(piece, move, board) {
   return Math.abs(move[1].alf - move[0].alf) === 2 &&
       move[1].num === move[0].num &&
       !rk.hasMoved && !piece.hasMoved &&
-      !isCheck(piece, move[1]) && !isCheck(piece, inBetween) &&
-      isLegalRook([{num: rk.Num, alf: rk.Alf}, {num: rk.Num, alf: piece.alf + dir}]);
+      !isCheck(piece, board, move[1]) && !isCheck(piece, board, inBetween) &&
+      isLegalRook([{num: rk.Num, alf: rk.Alf}, {num: rk.Num, alf: piece.alf + dir}], board);
 }
 
 function selectRook(move, board) {
@@ -51,7 +51,7 @@ function getThreatsKing(sq) {
   return q;
 }
 
-function isInCheck(color, l, board) {
+function isInCheck(color, board, l) {
   var kingLocation = l || getKing(color, board); //if not given by the user;
   var t = listThreatsByColor((color === "w") ? "b" : "w", board);
 

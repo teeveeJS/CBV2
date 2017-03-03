@@ -3,7 +3,7 @@ var ps = []; //this array is probably useless
 var MOVE_WHITE = true;
 var MOVES_LIST = []; //for en passant, read the last index
 MOVES_LIST[0] = 0;
-var SELECTED_SQAURE = null;
+var SELECTED_SQAURE = null;//can't spell
 
 var UNIVERSAL_BOARD = [
               [00, 01, 02, 03, 04, 05, 06, 07],
@@ -56,8 +56,8 @@ function isEmpty(n, a, board) {
 //OBSOLETE (pretty much)
 function hasPiece(start, board) {
   var sq = board[parseInt(start.num)][parseInt(start.alf)];
-  return sq.color === "w" && white_move ||
-        sq.color === "b" && !white_move;
+  return sq.color === "w" && MOVE_WHITE ||
+        sq.color === "b" && !MOVE_WHITE;
 }
 
 //defunct since ps[] not in use

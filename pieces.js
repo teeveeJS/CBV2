@@ -43,8 +43,7 @@ function createPieces() {
   return ps;
 };
 
-function getPieceSrc(i, j, board) {
-  var nc = board[j][i].color + board[j][i].name;
+function getPieceSrc(nc, board) {
   var sz = 1000 / 3;
   switch (nc) {
     case "wK": return {x: 0, y: 0};

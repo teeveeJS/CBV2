@@ -37,7 +37,7 @@ function enPassant(piece, move) {
   var deltaNum = move[1].num - move[0].num;
   var dir = Math.sign((piece.color === "w") - 0.5);
   return deltaAlf === 1 && dir * deltaNum === 1 &&
-    MOVES_LIST[moves.length-1].toString() === [{num: move[0].num + dir * 2, alf: move[1].alf}, {num: move[0].num, alf: move[1].alf}].toString();
+    MOVES_LIST[MOVES_LIST.length-1].toString() === [{num: move[0].num + dir * 2, alf: move[1].alf}, {num: move[0].num, alf: move[1].alf}].toString();
 }
 
 //promotion does not need to be checking in isLegalPawn because won't affect legality

@@ -58,7 +58,8 @@ function initGraphics(board) {
 
   for (var i = 0; i < 8; i++) {
     for (var j = 0; j < 8; j++) {
-      var sc = getPieceSrc(i, j, board);
+      var colorName = board[j][i].color + board[j][i].name;
+      var sc = getPieceSrc(colorName, board);
       //console.log(i + " " + j + " " + src);
       if (src !== null && sc !== null) {
         if (ROTATION) {
@@ -77,7 +78,7 @@ function initGraphics(board) {
 function updateGraphics(p, m, board) {
   var ctx = document.getElementById("board").getContext("2d");
   var src = document.getElementById("images");
-  var sc = getPieceSrc(m[1].alf, m[1].num, board);
+  var sc = getPieceSrc(p.color + p.name, board);
 
   if (ROTATION) {
     ctx.clearRect(m[0].alf * SQ_SIZE, (7 - m[0].num) * SQ_SIZE, SQ_SIZE, SQ_SIZE);
@@ -97,7 +98,7 @@ function updateGraphicsEnPassant(p, m, board) {
   var dir = m[0].num === 3 ? 1 : -1;
   var ctx = document.getElementById("board").getContext("2d");
   var src = document.getElementById("images");
-  var sc = getPieceSrc(m[1].alf, m[1].num, board);
+  var sc = getPieceSrc(p.color + p.name, board);
 
   if (ROTATION) {
     ctx.clearRect(m[1].alf * SQ_SIZE, (7 - m[1].num - dir) * SQ_SIZE, SQ_SIZE, SQ_SIZE);

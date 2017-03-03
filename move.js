@@ -72,8 +72,8 @@ function move(double_coord, board) {
 function movePieces(p, m, board) {
   //console.clear();
 
-  var notation = toAlgebraic(m, board);
-  console.log(notation);
+  //var notation = toAlgebraic(m, board);
+  //console.log(notation);
 
   //copies the object from the initial square to the output square
   board[m[1].num][m[1].alf] = board[m[0].num][m[0].alf];

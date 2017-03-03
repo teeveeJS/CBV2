@@ -3,13 +3,14 @@ function toAlgebraic(arr, board) {
   //should be called before the move is made on the board
   var move;
   var input = board[arr[0].num][arr[0].alf];
+  console.log(input);
   var p = input.name === "p" ? "" : input.name.toString();
   var x = capture(arr, board) || enPassant(input, arr, board) ? "x" : "";
   if (!p && x) p = numToAlf(arr[0].alf);
   if (checkCastle(input, arr, board)) {
     move = arr[1].alf === 2 ? "0-0-0" : "0-0";
   } else {
-    move = p + x + numToAlf(arr[1].alf) + (arr[1].num+1).toString();
+    move = p + x + numToAlf(arr[1].alf) + (arr[1].num + 1).toString();
   }
   return move;
 }
