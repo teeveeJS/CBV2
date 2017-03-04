@@ -1,13 +1,13 @@
-function toAlgebraic(arr, board) {
+function toAlgebraic(piece, arr) {
+  console.log(arr);
   //will likely be used to display the coordinates after the move
   //should be called before the move is made on the board
   var move;
-  var input = board[arr[0].num][arr[0].alf];
-  console.log(input);
-  var p = input.name === "p" ? "" : input.name.toString();
-  var x = capture(arr, board) || enPassant(input, arr, board) ? "x" : "";
+  var p = piece.name === "p" ? "" : piece.name.toString();
+  var x = capture(arr, UNIVERSAL_BOARD) ||
+      enPassant(piece, arr, UNIVERSAL_BOARD) ? "x" : "";
   if (!p && x) p = numToAlf(arr[0].alf);
-  if (checkCastle(input, arr, board)) {
+  if (checkCastle(piece, arr, UNIVERSAL_BOARD)) {
     move = arr[1].alf === 2 ? "0-0-0" : "0-0";
   } else {
     move = p + x + numToAlf(arr[1].alf) + (arr[1].num + 1).toString();

@@ -23,7 +23,7 @@ function graphicsMove(m) {
 
   var piece = UNIVERSAL_BOARD[m[0].num][m[0].alf];
 
-  if (piece) {
+  if (isNaN(piece)) {
     //to check that it is correct player's turn
     if (!MOVE_WHITE && piece.color === "w" || MOVE_WHITE && piece.color === "b") {
       alert("Tata pelia pelataan vuorotellen! - K.K.");
@@ -31,7 +31,10 @@ function graphicsMove(m) {
     }
 
     if (isLegal(piece, m, UNIVERSAL_BOARD)) {
-      movePieces(piece, m, UNIVERSAL_BOARD);
+      var notation = toAlgebraic(piece, m);
+      console.log(notation);
+
+      //movePieces(piece, m, UNIVERSAL_BOARD);
       displayBoard(UNIVERSAL_BOARD);
 
       //restarts the process...kinda

@@ -72,7 +72,8 @@ function getContent(n, a/*,board*/) {
 }
 
 function removePieceFrom(n, a, board) {
-  return board[n][a] = n*10+a;
+  board[n][a] = n*10+a;
+  return board;
   //however, doesn't delete the piece from the ps array
 }
 

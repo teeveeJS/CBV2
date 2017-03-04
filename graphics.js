@@ -75,10 +75,12 @@ function initGraphics(board) {
   return null;
 }
 
-function updateGraphics(p, m, board) {
+
+//TODO: updateGraphics functions don't need board argument (UNIVERSAL_BOARD wil suffice)
+function updateGraphics(p, m) {
   var ctx = document.getElementById("board").getContext("2d");
   var src = document.getElementById("images");
-  var sc = getPieceSrc(p.color + p.name, board);
+  var sc = getPieceSrc(p.color + p.name);
 
   if (ROTATION) {
     ctx.clearRect(m[0].alf * SQ_SIZE, (7 - m[0].num) * SQ_SIZE, SQ_SIZE, SQ_SIZE);
@@ -94,11 +96,11 @@ function updateGraphics(p, m, board) {
 
 }
 
-function updateGraphicsEnPassant(p, m, board) {
+function updateGraphicsEnPassant(p, m) {
   var dir = m[0].num === 3 ? 1 : -1;
   var ctx = document.getElementById("board").getContext("2d");
   var src = document.getElementById("images");
-  var sc = getPieceSrc(p.color + p.name, board);
+  var sc = getPieceSrc(p.color + p.name);
 
   if (ROTATION) {
     ctx.clearRect(m[1].alf * SQ_SIZE, (7 - m[1].num - dir) * SQ_SIZE, SQ_SIZE, SQ_SIZE);

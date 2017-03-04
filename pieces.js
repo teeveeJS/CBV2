@@ -43,7 +43,7 @@ function createPieces() {
   return ps;
 };
 
-function getPieceSrc(nc, board) {
+function getPieceSrc(nc) {
   var sz = 1000 / 3;
   switch (nc) {
     case "wK": return {x: 0, y: 0};

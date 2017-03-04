@@ -22,8 +22,6 @@ function move(double_coord, board) {
   //m is an array of two objects: start and end
   var piece = board[parseInt(m[0].num)][parseInt(m[0].alf)];
 
-  console.log(piece);
-
   if (piece) {
     //to check that it is correct player's turn
     if (!MOVE_WHITE && piece.color === "w" ||
@@ -34,9 +32,6 @@ function move(double_coord, board) {
 
     if (isLegal(piece, m, board)) {
       //perform the move
-      //console.log(m);
-      //var notation = toAlgebraic(m);
-      //console.log(notation);
       movePieces(piece, m, board);
       displayBoard(board);
 
@@ -72,45 +67,47 @@ function move(double_coord, board) {
 function movePieces(p, m, board) {
   //console.clear();
 
-  //var notation = toAlgebraic(m, board);
+  //var notation = toAlgebraic(m);
   //console.log(notation);
 
   //copies the object from the initial square to the output square
-  board[m[1].num][m[1].alf] = board[m[0].num][m[0].alf];
+  UNIVERSAL_BOARD[m[1].num][m[1].alf] = UNIVERSAL_BOARD[m[0].num][m[0].alf];
 
   //special conditions
-  if (promotion(p, m, board)) {
+  if (promotion(p, m)) {
     //TODO: handle BOTH capture and promotion (exd8=Q)
     var Pn;
     while (Pn !== "Q" && Pn !== "R" && Pn !== "B" && Pn !== "N") {
       Pn = prompt("Promote to: Q|R|B|N").toUpperCase();
     }
-    board[m[1].num][m[1].alf].name = Pn;
+    UNIVERSAL_BOARD[m[1].num][m[1].alf].name = Pn;
   } else if (checkCastle(p, m, board)) {
     //moves the rook
     var r = selectRook(m, board);
     var side = (r.Alf === 7) ? -1 : 1;
     var r_move = [{num: r.Num, alf: r.Alf}, {num: m[1].num, alf: m[1].alf + side}];
-    moveRook(r, r_move, board);
-  } else if (capture(m, board)) {
-    updateGraphicsCapture(p, m, board);
+    UNIVERSAL_BOARD = moveRook(r, r_move, board);
+  } else if (capture(m, UNIVERSAL_BOARD)) {
+    updateGraphicsCapture(p, m);
   } else if (enPassant(p, m, board)) {
     var dir = m[0].num === 3 ? 1 : -1; //up or down? based on color
-    removePieceFrom(m[1].num + dir, m[1].alf, board);
-    updateGraphicsEnPassant(p, m, board);
+    UNIVERSAL_BOARD = removePieceFrom(m[1].num + dir, m[1].alf, board);
+    updateGraphicsEnPassant(p, m);
   } else {
     null;
   }
 
 
   //sets the initial square back to normal
-  removePieceFrom(m[0].num, m[0].alf, board);
-  board[m[1].num][m[1].alf].hasMoved = true;
+  UNIVERSAL_BOARD = removePieceFrom(m[0].num, m[0].alf, board);
+  UNIVERSAL_BOARD[m[1].num][m[1].alf].hasMoved = true;
 
   MOVES_LIST.push(m);
   MOVE_WHITE = !MOVE_WHITE;
 
-  updateGraphics(p, m, board);
+  updateGraphics(p, m);
+
+  return board;
 }
 
 function moveRook(p, m, board) {

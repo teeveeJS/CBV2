@@ -41,7 +41,7 @@ function isLegal(p, mv, board) {
 }
 
 function assumeMove(p, m, board) {
-  var b = board; //copies the board
+  var b = board; //copies the board. totally unnecessary
 
   //copies the object from the initial square to the output square
   b[m[1].num][m[1].alf] = b[m[0].num][m[0].alf];
