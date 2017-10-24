@@ -1,10 +1,10 @@
-var SIZE = 480;
-var SQ_SIZE = SIZE / 8;
+const SIZE = 480;
+const SQ_SIZE = SIZE / 8;
 
 window.onload = function() {
   document.body.style.backgroundColor = "#4d94ff";
 
-  var canvasB = document.createElement("CANVAS");
+  let canvasB = document.createElement("CANVAS");
   document.body.appendChild(canvasB);
   canvasB.setAttribute("id", "board_background");
   canvasB.style.backgroundColor = "#ffffcc";
@@ -12,7 +12,7 @@ window.onload = function() {
   canvasB.style.marginLeft = "50px";
   canvasB.style.zIndex = -999;
 
-  var canvas = document.createElement("CANVAS");
+  let canvas = document.createElement("CANVAS");
   document.body.appendChild(canvas);
   canvas.setAttribute("id", "board");
   //canvas.style.backgroundColor = "#ffffcc";
@@ -22,11 +22,11 @@ window.onload = function() {
   //document.getElementById("start_game").addEventListener("click", new_game);
   document.getElementById("board").addEventListener("click", prelimCheck);
 
-  var can = document.getElementById("board");
+  let can = document.getElementById("board");
   can.height = SIZE;
   can.width = SIZE;
 
-  var canB = document.getElementById("board_background");
+  let canB = document.getElementById("board_background");
   canB.height = SIZE;
   canB.width = SIZE;
 
@@ -41,9 +41,9 @@ window.onload = function() {
 }
 
 function colorize() {
-  for (var i = 0; i < 8; i++) {
-    for (var j = 0; j < 8; j++) {
-      var ctx = document.getElementById("board_background").getContext("2d");
+  for (let i = 0; i < 8; i++) {
+    for (let j = 0; j < 8; j++) {
+      let ctx = document.getElementById("board_background").getContext("2d");
       if (i % 2 === 0 && j % 2 !== 0 || i % 2 !== 0 && j % 2 === 0) {
         ctx.fillStyle = "#663300";
         ctx.fillRect(i * SQ_SIZE, j * SQ_SIZE, SQ_SIZE, SQ_SIZE);
@@ -53,13 +53,13 @@ function colorize() {
 }
 
 function initGraphics(board) {
-  var ctx = document.getElementById("board").getContext("2d");
-  var src = document.getElementById("images");
+  let ctx = document.getElementById("board").getContext("2d");
+  let src = document.getElementById("images");
 
-  for (var i = 0; i < 8; i++) {
-    for (var j = 0; j < 8; j++) {
-      var colorName = board[j][i].color + board[j][i].name;
-      var sc = getPieceSrc(colorName, board);
+  for (let i = 0; i < 8; i++) {
+    for (let j = 0; j < 8; j++) {
+      let colorName = board[j][i].color + board[j][i].name;
+      let sc = getPieceSrc(colorName, board);
       //console.log(i + " " + j + " " + src);
       if (src !== null && sc !== null) {
         if (ROTATION) {
@@ -78,9 +78,9 @@ function initGraphics(board) {
 
 //TODO: updateGraphics functions don't need board argument (UNIVERSAL_BOARD wil suffice)
 function updateGraphics(p, m) {
-  var ctx = document.getElementById("board").getContext("2d");
-  var src = document.getElementById("images");
-  var sc = getPieceSrc(p.color + p.name);
+  let ctx = document.getElementById("board").getContext("2d");
+  let src = document.getElementById("images");
+  let sc = getPieceSrc(p.color + p.name);
 
   if (ROTATION) {
     ctx.clearRect(m[0].alf * SQ_SIZE, (7 - m[0].num) * SQ_SIZE, SQ_SIZE, SQ_SIZE);
@@ -97,10 +97,10 @@ function updateGraphics(p, m) {
 }
 
 function updateGraphicsEnPassant(p, m) {
-  var dir = m[0].num === 3 ? 1 : -1;
-  var ctx = document.getElementById("board").getContext("2d");
-  var src = document.getElementById("images");
-  var sc = getPieceSrc(p.color + p.name);
+  let dir = m[0].num === 3 ? 1 : -1;
+  let ctx = document.getElementById("board").getContext("2d");
+  let src = document.getElementById("images");
+  let sc = getPieceSrc(p.color + p.name);
 
   if (ROTATION) {
     ctx.clearRect(m[1].alf * SQ_SIZE, (7 - m[1].num - dir) * SQ_SIZE, SQ_SIZE, SQ_SIZE);
@@ -110,8 +110,8 @@ function updateGraphicsEnPassant(p, m) {
 }
 
 function updateGraphicsCapture(p, m) {
-  var ctx = document.getElementById("board").getContext("2d");
-  var src = document.getElementById("images");
+  let ctx = document.getElementById("board").getContext("2d");
+  let src = document.getElementById("images");
 
   if (ROTATION){
     ctx.clearRect(m[1].alf * SQ_SIZE, (7 - m[1].num) * SQ_SIZE, SQ_SIZE, SQ_SIZE);

@@ -69,3 +69,19 @@ function listThreatsByColor(color, board) {
   //return b;
   return t;
 }
+
+
+//this will be required for the moveTable
+function getThreatsKing(sq) {
+  let q = [];
+  for (let i = -1; i <= 1; i++) {
+    for (let j = -1; j <= 1; j++) {
+      if (limTest(sq.num + i) && limTest(sq.alf + j)) {
+        q.push({num: sq.num+i, alf: sq.alf+j});
+      }
+    }
+  }
+  q.splice(4, 1); //removes the threat from the square where the king is
+  //the king can't move to its own square
+  return q;
+}

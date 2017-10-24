@@ -1,27 +1,27 @@
 function prelimCheck(event) {
   //mouseX = event.clientX
   //console.log(event.clientX + " " + event.clientY);
-  var sq = mouseToCoord(event.clientX, event.clientY);
+  let sq = mouseToCoord(event.clientX, event.clientY);
 
   //console.log(sq + " " + selectedSquare);
 
-  if (SELECTED_SQAURE === null) {
-    SELECTED_SQAURE = sq;
+  if (SELECTED_SQUARE === null) {
+    SELECTED_SQUARE = sq;
     return null;
-  } else if (SELECTED_SQAURE === sq) {
-    SELECTED_SQAURE = null;
+  } else if (SELECTED_SQUARE === sq) {
+    SELECTED_SQUARE = null;
     return null;
   } else {
     //has clicked two distinct squares
-    graphicsMove([SELECTED_SQAURE, sq], UNIVERSAL_BOARD);
+    graphicsMove([SELECTED_SQUARE, sq], UNIVERSAL_BOARD);
   }
 }
 
 //mostly recycled code
 function graphicsMove(m) {
-  SELECTED_SQAURE = null;
+  SELECTED_SQUARE = null;
 
-  var piece = UNIVERSAL_BOARD[m[0].num][m[0].alf];
+  let piece = UNIVERSAL_BOARD[m[0].num][m[0].alf];
 
   if (isNaN(piece)) {
     //to check that it is correct player's turn
@@ -31,7 +31,7 @@ function graphicsMove(m) {
     }
 
     if (isLegal(piece, m, UNIVERSAL_BOARD)) {
-      var notation = toAlgebraic(piece, m);
+      let notation = toAlgebraic(piece, m);
       console.log(notation);
 
       //movePieces(piece, m, UNIVERSAL_BOARD);
