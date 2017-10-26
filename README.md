@@ -1,5 +1,5 @@
 # CBV2
 
-ChessBoard version 2.999999
+ChessBoard version 2.999999 + 0.000001
 
-It's perfect
+still completely lost
