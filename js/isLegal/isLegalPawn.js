@@ -16,14 +16,14 @@ function isLegalPawn(piece, move, board) {
     board.isSqEmpty(move[1].num, move[1].alf)) {
       return true;
   };
-  //single move
+  //single move forward
   if (deltaAlf == 0 && dir * deltaNum == 1 &&
     board.isSqEmpty(move[1].num, move[1].alf)) {
       return true;
   };
   //captures
   if (deltaAlf == 1 && dir * deltaNum == 1 &&
-    board.entity[move[1].num][move[1].alf].color != undefined) {
+    board.entity[move[1].num][move[1].alf] != "o") {
       return true;
   }
 
@@ -37,7 +37,11 @@ function enPassant(piece, move, board) {
   let deltaNum = move[1].num - move[0].num;
   let dir = Math.sign((piece.color == "w") - 0.5);
   return piece.name == "p" && deltaAlf == 1 && dir * deltaNum == 1 &&
-    board.moves_list[board.moves_list.length-1].toString() == [{num: move[0].num + dir * 2, alf: move[1].alf}, {num: move[0].num, alf: move[1].alf}].toString();
+    board.moves_list[board.moves_list.length-1].toString() == [
+      {num: move[0].num + dir * 2, alf: move[1].alf},
+      {num: move[0].num, alf: move[1].alf}
+    ].toString() &&
+    board.entity[move[1].num][move[1].alf].color != piece.color;
 }
 
 //promotion does not need to be checking in isLegalPawn because won't affect legality

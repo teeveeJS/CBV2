@@ -1,29 +1,32 @@
+'use strict';
+
 let SELECTED_SQUARE = null;
 
-const EMPTY_BOARD = [
-              [00, 01, 02, 03, 04, 05, 06, 07],
-              [10, 11, 12, 13, 14, 15, 16, 17],
-              [20, 21, 22, 23, 24, 25, 26, 27],
-              [30, 31, 32, 33, 34, 35, 36, 37],
-              [40, 41, 42, 43, 44, 45, 46, 47],
-              [50, 51, 52, 53, 54, 55, 56, 57],
-              [60, 61, 62, 63, 64, 65, 66, 67],
-              [70, 71, 72, 73, 74, 75, 76, 77]
-            ];
-            //defaults which will be changed when initBoard has been called
+const EMPTY_BOARD = ( function() {
+                        let b = [[], [], [], [], [], [], [], []];
+                        for (let i = 0; i < 8; i++) {
+                          for (let j = 0; j < 8; j++) {
+                            b[i][j] = "o";
+                          }
+                        }
+                        return b;
+                      }
+                    ) ();
+
             //alf = the second number
             //num = the first number
+            // [alf][num]
 
 //STARTING POSITION
-function __initBoard() {
-  let entity = EMPTY_BOARD;
-  let pcs = createPieces();
-  for (i in pcs) {
-    entity[pcs[i].Num][pcs[i].Alf] = pcs[i];
-  }
-  return entity;
-}
-const INIT_BOARD = __initBoard();
+const INIT_BOARD = ( function() {
+                        let entity = copy(EMPTY_BOARD);
+                        let pcs = createPieces();
+                        for (let i in pcs) {
+                          entity[pcs[i].Num][pcs[i].Alf] = pcs[i];
+                        }
+                        return entity;
+                      }
+                    ) ();
 
 const VALUES = {
   K: 999,
@@ -33,6 +36,11 @@ const VALUES = {
   N: 3,
   p: 1
 };
+
+function copy(arr) {
+  //creates a deep copy of arr
+  return JSON.parse(JSON.stringify(arr));
+}
 
 function constrain(num, min, max) {
   let ma = min || 0;

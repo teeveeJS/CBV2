@@ -17,6 +17,7 @@ class Piece {
 };
 
 //currently just used for defaults
+//TODO: null pieces?
 function createPieces() {
   let ps = [];
   for (let j = 0; j < 8; j++) {

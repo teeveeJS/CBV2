@@ -1,17 +1,17 @@
 function move(double_coord, board) {
   //checks for the termination of the game
   if (double_coord.toUpperCase() == "RESIGN") {
-    if (board.move_white) RESULT = "0-1";
-    else RESULT = "1-0";
-    console.log("Game Over! " + RESULT);
+    if (board.move_white) board.result = "0-1";
+    else board.result = "1-0";
+    console.log("Game Over! " + board.result);
     return null;
   } else if (double_coord.toUpperCase() == "DRAW") {
-    RESULT = "1/2-1/2";
-    console.log("Game Over! " + RESULT);
+    board.result = "1/2-1/2";
+    console.log("Game Over! " + board.result);
     return null;
   } else if (double_coord.toUpperCase() == "ADJOURN") {
-    RESULT = "*";
-    console.log("Game Over! " + RESULT);
+    board.result = "*";
+    console.log("Game Over! " + board.result);
     return null;
   } else if (double_coord.length != 5) {
     move(prompt("Illegal notation!"), board);
@@ -24,8 +24,8 @@ function move(double_coord, board) {
 
   if (piece) {
     //to check that it is correct player's turn
-    if (!board.move_white && piece.color === "w" ||
-      board.move_white && piece.color === "b") {
+    if (!board.move_white && piece.color == "w" ||
+      board.move_white && piece.color == "b") {
         move(prompt("Not your turn!"), board);
         return null;
       }
@@ -43,6 +43,7 @@ function move(double_coord, board) {
     }
   } else {
     //call the prompt
+    // ^actually don't; this is only with graphics!
     move(prompt("No piece selected!"), board);
     return null;
   }

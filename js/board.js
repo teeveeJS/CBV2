@@ -1,18 +1,19 @@
 class Board {
   constructor(init_pos) {
-    this.entity = init_pos || INIT_BOARD;
+    this.entity = init_pos || copy(INIT_BOARD);
     this.move_white = true; //TODO: enums??
     this.moves_list = []; //for en passant, read the previous move in the list
+    this.moves_list[0] = 0; //temporary
     this.result = null;
     this.orientation = true; //true: white in front; false: black in front
   }
 
   clear_empty() {
-    this.entity = EMPTY_BOARD;
+    this.entity = copy(EMPTY_BOARD);
   }
 
   clear_start() {
-    this.entity = INIT_BOARD;
+    this.entity = copy(INIT_BOARD);
   }
 
   isCapture(move) {
@@ -20,10 +21,12 @@ class Board {
   }
 
   isSqEmpty(num, alf) {
-    return this.entity[num][alf].color == undefined;
+    return this.entity[num][alf] == "o";
   }
 
-  movePieces(p, m) {
+  movePieces(p, m, log=true) {
+    // if(log) then print all stuff
+
     //console.clear();
 
     //let notation = toAlgebraic(m);
@@ -44,8 +47,9 @@ class Board {
       let side = (r.Alf == 7) ? -1 : 1;
       let r_move = [{num: r.Num, alf: r.Alf}, {num: m[1].num, alf: m[1].alf + side}];
       moveRook(r, r_move, this); //this seems very sketchy
-    } else if (isCapture(m)) {
+    } else if (this.isCapture(m)) {
       // updateGraphicsCapture(p, m); forget about graphic for now
+      console.log("a piece was captured");
     } else if (enPassant(p, m, this)) {
       let dir = m[0].num == 3 ? 1 : -1; //up or down? based on color
       this.removePieceFrom(m[1].num + dir, m[1].alf);
@@ -82,7 +86,7 @@ class Board {
         if (this.entity[i][j].color != undefined) {
           str += this.entity[i][j].color + this.entity[i][j].name + " ";
         } else {
-          str += "o  "; //the board-array never actually contains "o";
+          str += this.entity[i][j] + "  ";
         }
       }
       console.log(String(i + 1) + " " + str);
@@ -91,7 +95,7 @@ class Board {
   }
 
   removePieceFrom(num, alf) {
-    this.entity[num][alf] = num*10 + alf;
+    this.entity[num][alf] = "o";
   }
 
   //for creating a custom board
