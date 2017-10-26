@@ -36,7 +36,7 @@ function enPassant(piece, move, board) {
   let deltaAlf = Math.abs(move[1].alf - move[0].alf);
   let deltaNum = move[1].num - move[0].num;
   let dir = Math.sign((piece.color == "w") - 0.5);
-  return deltaAlf == 1 && dir * deltaNum == 1 &&
+  return piece.name == "p" && deltaAlf == 1 && dir * deltaNum == 1 &&
     board.moves_list[board.moves_list.length-1].toString() == [{num: move[0].num + dir * 2, alf: move[1].alf}, {num: move[0].num, alf: move[1].alf}].toString();
 }
 

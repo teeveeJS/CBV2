@@ -4,7 +4,7 @@ function toAlgebraic(piece, arr, board) {
   //should be called before the move is made on the board
   let move;
   let p = piece.name == "p" ? "" : piece.name.toString();
-  let x = capture(arr, board) ||
+  let x = board.isCapture(arr) ||
       enPassant(piece, arr, board) ? "x" : "";
   if (!p && x) p = numToAlf(arr[0].alf);
   if (checkCastle(piece, arr, board)) {

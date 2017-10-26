@@ -1,6 +1,6 @@
 let SELECTED_SQUARE = null;
 
-const DEFAULT_BOARD = [
+const EMPTY_BOARD = [
               [00, 01, 02, 03, 04, 05, 06, 07],
               [10, 11, 12, 13, 14, 15, 16, 17],
               [20, 21, 22, 23, 24, 25, 26, 27],
@@ -13,6 +13,17 @@ const DEFAULT_BOARD = [
             //defaults which will be changed when initBoard has been called
             //alf = the second number
             //num = the first number
+
+//STARTING POSITION
+function __initBoard() {
+  let entity = EMPTY_BOARD;
+  let pcs = createPieces();
+  for (i in pcs) {
+    entity[pcs[i].Num][pcs[i].Alf] = pcs[i];
+  }
+  return entity;
+}
+const INIT_BOARD = __initBoard();
 
 const VALUES = {
   K: 999,
@@ -36,28 +47,12 @@ function limTest(num) {
   return !(num > 7 || num < 0);
 }
 
-//OBSOLETE (pretty much)
-function hasPiece(start, board) {
-  let sq = board[parseInt(start.num)][parseInt(start.alf)];
-  return sq.color === "w" && MOVE_WHITE ||
-        sq.color === "b" && !MOVE_WHITE;
-}
-
-//defunct since ps[] not in use
-function getContent(n, a/*,board*/) {
-  for (let i=0; i<ps.length; i++) {
-    if (ps[i].Num === n && ps[i].Alf === a) {
-      return ps[i];
-    }
+function selectRook(move, board) {
+  switch (move[1].alf + move[1].num) {
+    case 2: return board.entity[0][0];
+    case 6: return board.entity[0][7];
+    case 9: return board.entity[7][0];
+    case 13: return board.entity[7][7];
+    default: return "error";
   }
-  //return board[n][a]; this would work just as well...
-  //now that i think of this...probably not all that useful
-}
-
-function setNewPieceTo(p, c, n, a, board) {
-  return board[n][a] = new Piece(p, c, a, n);
-}
-
-function capture(move, board) {
-  return board[move[1].num][move[1].alf].color !== undefined;
 }
