@@ -1,5 +1,6 @@
 const assert = require("assert");
 const Coordinates = require("coordinates");
+const Board = require("board");
 
 describe("Coordinates", () => {
   describe("toAlgebraic()", () => {
@@ -47,7 +48,29 @@ describe("Coordinates", () => {
       });
     });
 
+    describe("Check", () => {
+      it("Bishop check (black; no capture)", () => {
+        let move = {
+          start: {alf: 5, num: 7},
+          end: {alf: 1, num: 3}
+        };
+        assert.equal(Coordinates.toAlgebraic("b", move, b4, null), "Bb4+");
+      });
+      it("Queen check (black; no capture)", () => {
+        let move = {
+          start: {alf: 3, num: 7},
+          end: {alf: 7, num: 3}
+        };
+        assert.equal(Coordinates.toAlgebraic("q", move, b4, null), "Qh4+");
+      });
 
-
+      it("Bishop check (white; capture)", () => {
+        let move = {
+          start: {alf: 1, num: 4},
+          end: {alf: 2, num: 5}
+        };
+        assert.equal(Coordinates.toAlgebraic("B", move, b2, null), "Bxc6+");
+      });
+    });
   });
 });
